@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import SignUpScreen from "./screens/SignUpScreen";
+import SignInScreen from "./screens/SignInScreen";
+import LoadingOverlay from "./components/UI/LoadingOverlay";
+import ScreenOne from "./components/onboarding/ScreenOne";
+import ScreenTwo from "./components/onboarding/ScreenTwo";
+import ScreenThree from "./components/onboarding/ScreenThree";
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
       <StatusBar style="auto" />
-    </View>
+      <LoadingOverlay />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
