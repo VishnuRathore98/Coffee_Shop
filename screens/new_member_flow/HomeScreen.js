@@ -1,15 +1,16 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon  from "react-native-vector-icons/Ionicons";
 import {useFonts, Poppins_600SemiBold, Poppins_500Medium, Poppins_400Regular, Poppins_100Thin, Poppins_300Light} from '@expo-google-fonts/poppins'
 import  AppLoading  from "expo-app-loading";
 
 export default function HomeScreen(){
-    let [fonstLoaded] = useFonts({Poppins_600SemiBold, Poppins_500Medium, Poppins_400Regular, Poppins_100Thin, Poppins_300Light});
+    let [fonstLoaded] = useFonts({Poppins_600SemiBold,  Poppins_500Medium, Poppins_400Regular, Poppins_100Thin, Poppins_300Light});
     if (!fonstLoaded) {
         return <AppLoading />
     }
     else{
     return (
+        <ScrollView>
         <View style={styles.rootContainer}>
             <View style={styles.bannerContainer}>
                 <View style={styles.greetingContainer}>
@@ -39,19 +40,24 @@ export default function HomeScreen(){
                 </View>
                 <View style={{}}>
                     <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                        <View style={{flex:1, borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}><Image style={{width:100, height:120}} source={require('../../assets/hotcoffee.png')}/></View>
-                        <View style={{flex:1,  borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}><Image style={{width:100, height:120}} source={require('../../assets/hottea.png')}/></View>
-                        <View style={{flex:1,  borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}><Image style={{width:100, height:120}} source={require('../../assets/hotdrink.png')}/></View>
+                        <View style={{borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{ width:100, height:120}} source={require('../../assets/hotcoffee.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Coffees</Text></View>
+                        <View style={{ borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:100, height:120}} source={require('../../assets/hottea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Teas</Text></View>
+                        <View style={{ borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:100, height:120}} source={require('../../assets/hotdrink.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Drinks</Text></View>
                     </View>
                     
                     <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                        <View style={{flex:1, borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white' }}><Image style={{width:100, height:120}} source={require('../../assets/frappucino.png')}/></View>
-                        <View style={{flex:1, borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}><Image style={{width:100, height:120}} source={require('../../assets/coldcoffee.png')}/></View>
-                        <View style={{flex:1, borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}><Image style={{width:100, height:120}} source={require('../../assets/icedtea.png')}/></View>
+                        <View style={{borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:100, height:120}} source={require('../../assets/frappucino.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Frappucino</Text></View>
+                        <View style={{borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:100, height:120}} source={require('../../assets/coldcoffee.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Cold Coffees</Text></View>
+                        <View style={{borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:100, height:120}} source={require('../../assets/icedtea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Iced Teas</Text></View>
+                    </View>
+                    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <View style={{borderWidth:1, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5   }}><Image style={{width:100, height:120}} source={require('../../assets/colddrink.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Cold Drinks</Text></View>
+                        
                     </View>
                 </View>
             </View>
         </View>
+        </ScrollView>
     );
     }
 }
@@ -82,5 +88,6 @@ const styles = StyleSheet.create({
         flex:1,
         borderWidth:1,
         margin:18,
+        // padding:18
     }
 });

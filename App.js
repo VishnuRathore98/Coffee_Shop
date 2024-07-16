@@ -24,11 +24,12 @@ import RewardScreen from "./screens/new_member_flow/RewardScreen";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
+
 
 // Bottom Tab Navigator
 function Home() {
@@ -84,6 +85,8 @@ function Home() {
 }
 
 function DrawerNavigation() {
+  const navigation = useNavigation();
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -95,7 +98,7 @@ function DrawerNavigation() {
           />
         ),
         headerRight: () => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('Cart')}>
             <Icon
               name="bag-handle-outline"
               size={34}
