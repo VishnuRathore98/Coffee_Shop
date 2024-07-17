@@ -3,21 +3,21 @@ import { useFonts, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-f
 import AppLoading from "expo-app-loading";
 import { Dropdown } from "react-native-element-dropdown";
 
-const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ];
+// const data = [
+//     { label: 'Item 1', value: '1' },
+//     { label: 'Item 2', value: '2' },
+//     { label: 'Item 3', value: '3' },
+//     { label: 'Item 4', value: '4' },
+//     { label: 'Item 5', value: '5' },
+//     { label: 'Item 6', value: '6' },
+//     { label: 'Item 7', value: '7' },
+//     { label: 'Item 8', value: '8' },
+//   ];
 
 export default function OrderScreen(){
     let [fonstLoaded] = useFonts({Poppins_500Medium, Poppins_600SemiBold});
     if (!fonstLoaded){
-        <AppLoading />
+        return <AppLoading />;
     }
     else{
     return (
@@ -35,19 +35,20 @@ export default function OrderScreen(){
                 <View>
                     <View style={{borderWidth:1, padding:20}}>
                         <Text>Cup Size</Text>
-                        <Dropdown  style={{borderWidth:1,}} value={null}/>
+                        {/* Throwing Error: Maximum update depth exceeded.  */}
+                        {/* <Dropdown  style={{borderWidth:1,}} /> */}
                     </View>
                     <View style={{borderWidth:1, padding:20}}>
                         <Text>Add-Ins</Text>
-                        <Dropdown  style={{borderWidth:1,}} value={null}/>
+                        {/* <Dropdown  style={{borderWidth:1,}} /> */}
                     </View>
                     <View style={{borderWidth:1, padding:20}}>
                         <Text>Sweetner</Text>
-                        <Dropdown  style={{borderWidth:1,}} value={null}/>
+                        {/* <Dropdown  style={{borderWidth:1,}} /> */}
                     </View>
                     <View style={{borderWidth:1, padding:20}}>
                         <Text>Flavor</Text>
-                        <Dropdown  style={{borderWidth:1,}} value={null}/>
+                        {/* <Dropdown  style={{borderWidth:1,}} /> */}
                     </View>
                 </View>
             </View>

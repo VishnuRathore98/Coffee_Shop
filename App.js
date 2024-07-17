@@ -32,7 +32,8 @@ const BottomTab = createBottomTabNavigator();
 
 
 // Bottom Tab Navigator
-function Home() {
+function Home({navigation}) {
+  // console.log("Parent:"+navigation.getParent+"\nID:"+navigation.getParam);
   return (
     <BottomTab.Navigator screenOptions={{ headerShown: false }}>
       <BottomTab.Screen
@@ -80,6 +81,15 @@ function Home() {
           ),
         }}
       />
+      {/* <BottomTab.Screen
+        name="Rewards"
+        component={navigation.navigate('')}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Icon name="bowling-ball-outline" size={size} />
+          ),
+        }}
+      /> */}
     </BottomTab.Navigator>
   );
 }
@@ -109,11 +119,11 @@ function DrawerNavigation() {
       }}
     >
       <Drawer.Screen name="Home Tab" component={Home} />
-      <Drawer.Screen name="Order" component={OrderScreen} />
-      <Drawer.Screen name="Cart" component={CartScreen} />
-      <Drawer.Screen name="CheckOut" component={CheckOutScreen} />
-      <Drawer.Screen name="ProductDetail" component={ProductDetailScreen} />
-      <Drawer.Screen name="TrackOrder" component={TrackOrderScreen} />
+      <Drawer.Screen name="OrderScreen" component={Home} />
+      <Drawer.Screen name="CartScreen" component={Home} />
+      <Drawer.Screen name="CheckOutScreen" component={CheckOutScreen} />
+      <Drawer.Screen name="ProductDetailScreen" component={Home} />
+      <Drawer.Screen name="TrackOrderScreen" component={Home} />
     </Drawer.Navigator>
   );
 }
