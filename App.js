@@ -108,7 +108,7 @@ function DrawerNavigation() {
           />
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={()=>navigation.navigate('Cart')}>
+          <TouchableOpacity onPress={()=>navigation.navigate('CartScreen')}>
             <Icon
               name="bag-handle-outline"
               size={34}
