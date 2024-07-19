@@ -21,6 +21,7 @@ import TrackOrderScreen from "./screens/new_member_flow/TrackOrderScreen";
 import ScanAndPayScreen from "./screens/new_member_flow/ScanAndPayScreen";
 import AccountScreen from "./screens/new_member_flow/AccountScreen";
 import RewardScreen from "./screens/new_member_flow/RewardScreen";
+import ReceiptScreen from "./screens/new_member_flow/ReceiptScreen";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -119,11 +120,12 @@ function DrawerNavigation() {
       }}
     >
       <Drawer.Screen name="Home Tab" component={Home} />
-      <Drawer.Screen name="OrderScreen" component={Home} />
-      <Drawer.Screen name="CartScreen" component={Home} />
+      <Drawer.Screen name="OrderScreen" component={OrderScreen} />
+      <Drawer.Screen name="CartScreen" component={CartScreen} />
       <Drawer.Screen name="CheckOutScreen" component={CheckOutScreen} />
-      <Drawer.Screen name="ProductDetailScreen" component={Home} />
-      <Drawer.Screen name="TrackOrderScreen" component={Home} />
+      <Drawer.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
+      <Drawer.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
+      <Drawer.Screen name="ReceiptScreen" component={ReceiptScreen} />
     </Drawer.Navigator>
   );
 }
@@ -133,6 +135,7 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
+        
         <DrawerNavigation />
       </NavigationContainer>
     </>

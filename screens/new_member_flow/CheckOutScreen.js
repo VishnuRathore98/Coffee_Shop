@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
   useFonts,
   Poppins_500Medium,
@@ -9,7 +9,7 @@ import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import { GlobalStyles } from "../../constants/styles";
 
-export default function CheckOutScreen() {
+export default function CheckOutScreen({navigation}) {
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -191,7 +191,7 @@ export default function CheckOutScreen() {
 
           </View>
         </View>
-        <TouchableOpacity style={{backgroundColor: GlobalStyles.colors.signUp.fillColor1, marginVertical:24, marginHorizontal:10, height:60, borderWidth:1, borderRadius:22, justifyContent:'center', alignItems:'center'}}>
+        <TouchableOpacity  style={{backgroundColor: GlobalStyles.colors.signUp.fillColor1, marginVertical:24, marginHorizontal:10, height:60, borderWidth:1, borderRadius:22, justifyContent:'center', alignItems:'center', }}>
             <Text style={{color:'white',fontSize:14 , fontFamily: "Poppins_500Medium" }}>Checkout <Text>$6.99</Text></Text>
         </TouchableOpacity>
 
