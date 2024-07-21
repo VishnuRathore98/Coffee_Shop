@@ -1,25 +1,57 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
-import { useFonts, Poppins_500Medium } from "@expo-google-fonts/poppins";
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import AppLoading from "expo-app-loading";
 
 export default function TrackOrderScreen() {
-  let [fontsLoaded] = useFonts({ Poppins_500Medium });
+  let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_700Bold, });
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <View style={styles.rootContainer}>
         <View style={styles.orderTrackingContainer}>
-          <Text>Tracking Order</Text>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text>Order has been received</Text>
-            <Text>Preparing your order</Text>
-            <Text>Your order is complete! Meet us at the pickup area.</Text>
+          <Text style={{fontSize:20, fontFamily:'Poppins_700Bold', marginBottom:12, textAlign:'left'}}>Tracking Order</Text>
+
+        <View style={{flexDirection:'row', justifyContent:'center'}}>
+
+          <View style={{justifyContent:'center', alignItems:'center', marginRight:12}}>
+            <Image style={{height:18, width:18,}} source={require('../../assets/tracking-pins/dot.png')} />
+            <Image style={{height:40, width:2}} source={require('../../assets/tracking-pins/line.png')} />
+            <Image style={{height:18, width:18}} source={require('../../assets/tracking-pins/dot.png')} />
+            <Image style={{height:40, width:2}} source={require('../../assets/tracking-pins/line.png')} />
+            <Image style={{height:33, width:33}} source={require('../../assets/tracking-pins/tick.png')} />
           </View>
+
+          <View style={{justifyContent:'space-between', }}>
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Order has been received</Text>
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Preparing your order</Text>
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Your order is complete! Meet us at the pickup area.</Text>
+          </View>
+
+          {/* <View style={{flexDirection:'row', alignItems:'center'}}>
+            <Image style={{height:18, width:18}} source={require('../../assets/tracking-pins/dot.png')} />
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Order has been received</Text>
+          </View>
+          
+          <Image style={{height:40, width:2}} source={require('../../assets/tracking-pins/line.png')} />
+          
+          <View style={{flexDirection:'row', alignItems:'center'}}>
+            <Image style={{height:18, width:18}} source={require('../../assets/tracking-pins/dot.png')} />
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Preparing your order</Text>
+          </View>
+          
+          <Image style={{height:40, width:2}} source={require('../../assets/tracking-pins/line.png')} />
+            
+          <View style={{flexDirection:'row', alignItems:'center'}}>
+            <Image style={{height:33, width:33}} source={require('../../assets/tracking-pins/tick.png')} />
+            <Text style={{fontFamily:'Poppins_400Regular'}}>Your order is complete! Meet us at the pickup area.</Text>
+          </View> */}
+          
+        </View>
         </View>
 
-        <TouchableOpacity style={styles.orderPickupButton}>
+        <TouchableOpacity style={[styles.orderPickupButton, {backgroundColor:'#4E8D7C'}]}>
           <Text style={styles.pickupButtonText}>Pickup Order</Text>
         </TouchableOpacity>
 
@@ -44,9 +76,11 @@ export default function TrackOrderScreen() {
               <Text style={styles.headingText}>03:30 PM</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.orderPickupButton}>
+          <View style={{alignItems:'center'}}>
+          <TouchableOpacity style={[styles.orderPickupButton,{width:160}]}>
             <Text style={styles.pickupButtonText}>Review Receipt</Text>
           </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -58,24 +92,26 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: "center",
     // alignItems: "center",
-    borderWidth:1,
+    // borderWidth:0.1,
     marginHorizontal:50,
-    marginVertical:100,
-    
+    marginVertical:80,    
   },
   orderTrackingContainer: {
     backgroundColor:'white',
     justifyContent: "center",
-    alignItems: "center",
-    padding:50
+    // alignItems:'center',
+    padding:50,
+    borderRadius:22,
+    marginBottom:25,
   },
   orderPickupButton: {
     backgroundColor: GlobalStyles.colors.signUp.fillColor1,
     height: 60,
-    borderWidth: 1,
+    elevation:4,
     borderRadius: 22,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom:25,
   },
   reviewReceiptContainer: {
     padding:10,
@@ -87,7 +123,7 @@ const styles = StyleSheet.create({
   },
   receiptContent: {
     borderBottomWidth: 1,
-    marginBottom: 10,
+    marginBottom: 25,
     borderStyle: "dashed",
     borderBottomColor: "#8F8E8E",
   },

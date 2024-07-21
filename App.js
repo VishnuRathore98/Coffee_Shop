@@ -22,6 +22,7 @@ import ScanAndPayScreen from "./screens/new_member_flow/ScanAndPayScreen";
 import AccountScreen from "./screens/new_member_flow/AccountScreen";
 import RewardScreen from "./screens/new_member_flow/RewardScreen";
 import ReceiptScreen from "./screens/new_member_flow/ReceiptScreen";
+import CustomizeOrder from "./screens/new_member_flow/CustomizeOrder";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -126,6 +127,7 @@ function DrawerNavigation() {
       <Drawer.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
       <Drawer.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
       <Drawer.Screen name="ReceiptScreen" component={ReceiptScreen} />
+      <Drawer.Screen name="CustomizeOrder" component={CustomizeOrder} />
     </Drawer.Navigator>
   );
 }

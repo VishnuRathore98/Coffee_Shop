@@ -83,10 +83,10 @@ export default function ReceiptScreen() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: 'flex-start',
     // alignItems: "center",
     marginHorizontal: 30,
-    // marginVertical: 30,
+    marginVertical: 80,
   },
   receiptContainer: {
     // justifyContent:'center',
