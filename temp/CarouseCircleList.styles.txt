@@ -1,0 +1,32 @@
+import { StyleSheet } from 'react-native';
+
+import { SCREEN_WIDTH, colors } from '@/theme';
+import { normalize } from '@/utils/layout-utils';
+
+export const styles = StyleSheet.create({
+  boxMainConatainer: {
+    width: SCREEN_WIDTH,
+    height: 100,
+  },
+  carouseCircleContainer: {
+    height: '100%',
+    width: '100%',
+  },
+  boxCircleOverlayContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  boxCenterCircleOverlay: {
+    height: normalize(75),
+    width: normalize(75),
+
+    borderColor: colors.white,
+    borderWidth: normalize(5),
+    borderRadius: normalize(75 / 2),
+  },
+});

@@ -1,27 +1,29 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {Poppins_400Regular} from "@expo-google-fonts/poppins";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Icon  from "react-native-vector-icons/Ionicons";
 import Carousel from 'react-native-reanimated-carousel';
-
+import { useSharedValue } from "react-native-reanimated";
 
 
 export default function ScanAndPayScreen(){
     const [scanAndPaySelected, setScanAndPaySelected] = useState(true);
     const [rewardSelected, setRewardSelected] = useState(false);
+    const ref = useRef(null);
+    const scrollOffsetValue = useSharedValue(0);
 
     const views1 = [
         {
-           imgUrl: "/home/vpsr/Desktop/React-Native/RNCourse/Coffee-Shop/Coffee_Shop/assets/paycards/defaultCard.png",
-           title: "Airport Cabs",
+        id:1,
+         img:  "../../assets/paycards/defaultCard.png"
         },
         {
-           imgUrl: "/home/vpsr/Desktop/React-Native/RNCourse/Coffee-Shop/Coffee_Shop/assets/paycards/masterCard.png",
-           title: "Gift Cards",
+            id:2,
+          img: "../../assets/paycards/masterCard.png"
         },
         {
-           imgUrl: "/home/vpsr/Desktop/React-Native/RNCourse/Coffee-Shop/Coffee_Shop/assets/paycards/visaCard.png",
-           title: "Hourly Stays",
+            id:3,
+           img:"../../assets/paycards/visaCard.png"
         },
     ];
 
@@ -37,19 +39,11 @@ export default function ScanAndPayScreen(){
             setScanAndPaySelected(false);
         }
     }
-    function renderItem1 ({ item }) {
+    function renderItem1 ({index, item}) {
+        console.log(item.img);
         return (
-           <View style={styles.renderItem1_parentView}>
-              <Image source={{ uri: item.imgUrl }} style={styles.renderItem1_img} />
-              <View style={styles.renderItem1_view1}>
-                 <Text style={styles.renderItem1_text1}>OFFERS</Text>
-              </View>
-              <View style={styles.renderItem1_view2}>
-                 <Text style={styles.renderItem1_text2}>{item.title}</Text>
-                 <TouchableOpacity>
-                    <Text style={styles.renderItem1_text3}>EXPLORE OFFERS</Text>
-                 </TouchableOpacity>
-              </View>
+           <View >
+              {/* <Image source={require(item.img)} height={500} width={300}/> */}
             </View>
         );
      };
@@ -71,7 +65,7 @@ export default function ScanAndPayScreen(){
                     
                         // Carousel will go in here
                         <View style={{justifyContent:'center', alignItems:'center' }}>
-                        <Carousel
+                        {/* <Carousel
                             loop
                             width={300}
                             height={500}
@@ -80,7 +74,48 @@ export default function ScanAndPayScreen(){
                             scrollAnimationDuration={1000}
                             onSnapToItem={(index) => console.log('current index:', index)}
                             renderItem={renderItem1}
-                        />
+                        /> */}
+
+                        <Carousel
+                                vertical={ false}
+                                width={340}
+                                height= {550}
+                                // loop
+                                // enabled // Default is true, just for demo
+                                ref={ref}
+                                // defaultScrollOffsetValue={scrollOffsetValue}
+                                // testID={"xxx"}
+                                // style={{ width: "100%" }}
+                                autoPlay={false}
+                                // autoPlayInterval={isFast ? 100 : 2000}
+                                data={views1}
+                                // onScrollStart={()=>{console.log('===1')}}
+                                // onScrollEnd={()=>{console.log('===2')}}
+                                // onConfigurePanGesture={g => g.enabled(false)}
+                                // pagingEnabled={true}
+                                // onSnapToItem={index => console.log("current index:", index)}
+                                // "../../assets/paycards/defaultCard.png"
+                                renderItem={({index, item})=>{
+                                                        console.log(index, item.img);
+                                                        
+                                                            switch (index) {
+                                                                case 0:
+                                                                    return <Image source={require("../../assets/paycards/defaultCard.png")} height={600} width={350}/>        
+                                                                    
+                                                                case 1:
+                                                                        return <Image source={require("../../assets/paycards/masterCard.png")} height={600} width={350}/>        
+                                                                    
+                                                                case 2:
+                                                                    return <Image source={require("../../assets/paycards/visaCard.png")} height={600} width={350}/>        
+                                                                    
+                                                                default:
+                                                                    break;
+                                                            }
+                                                            
+                                                        
+                                                    }}
+                            />
+
                     </View>
                     
                 :
@@ -102,13 +137,13 @@ const styles = StyleSheet.create({
         backgroundColor:'#F6F2ED'
     },
     renderItem1_parentView: {
-        backgroundColor: "#ffffff",
+        // backgroundColor: "#ffffff",
         borderRadius: 18,
-        height: 250,
+        height: 550,
         width: 350,
-        justifyContent: "space-around",
-        alignItems: "center",
-        overflow: "hidden",
+        // justifyContent: "space-around",
+        // alignItems: "center",
+        // overflow: "hidden",
      },
      renderItem1_view1: {
         width: 80,
