@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {Poppins_400Regular} from "@expo-google-fonts/poppins";
 import { useState, useRef } from "react";
 import Icon  from "react-native-vector-icons/Ionicons";
@@ -58,34 +58,24 @@ export default function ScanAndPayScreen(){
             <Text style={{fontSize:20, fontFamily:'Poppins_400Regular'}}>Rewards Only</Text>
             </TouchableOpacity>
             </View>
-            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+            <View style={{}}>
                 {
                     scanAndPaySelected
                 ?
                     
                         // Carousel will go in here
-                        <View style={{justifyContent:'center', alignItems:'center' }}>
-                        {/* <Carousel
-                            loop
-                            width={300}
-                            height={500}
-                            // autoPlay={true}
-                            data={views1}
-                            scrollAnimationDuration={1000}
-                            onSnapToItem={(index) => console.log('current index:', index)}
-                            renderItem={renderItem1}
-                        /> */}
+                        <View style={{}}>
 
                         <Carousel
                                 vertical={ false}
-                                width={340}
-                                height= {550}
+                                width={360}
+                                height= {560}
                                 // loop
                                 // enabled // Default is true, just for demo
                                 ref={ref}
                                 // defaultScrollOffsetValue={scrollOffsetValue}
                                 // testID={"xxx"}
-                                // style={{ width: "100%" }}
+                                style={{borderRadius:30, }}
                                 autoPlay={false}
                                 // autoPlayInterval={isFast ? 100 : 2000}
                                 data={views1}
@@ -100,13 +90,83 @@ export default function ScanAndPayScreen(){
                                                         
                                                             switch (index) {
                                                                 case 0:
-                                                                    return <Image source={require("../../assets/paycards/defaultCard.png")} height={600} width={350}/>        
-                                                                    
+                                                                    return (
+                                                                        
+                                                                            <ImageBackground source={require("../../assets/paycards/defaultCard.png")} style={styles.backgroundImage} resizeMode="cover">        
+                                                                                
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', paddingHorizontal:50}}>
+                                                                                    <Text style={{color:'white', fontSize:24}}>Rewards</Text>
+                                                                                    <Text style={{color:'white', fontSize:24}}><Icon name="star-half-outline" size={24}/>1300</Text>
+                                                                                </View>
+                                                                                <View style={{ justifyContent:'center', alignItems:'center', paddingHorizontal:50}}>
+                                                                                    <Text style={{color:'white', fontSize:50}}>$52.17</Text>
+                                                                                    <Icon name="qr-code-outline" color="white" size={200}/>
+                                                                                </View>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', paddingHorizontal:50}}>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="logo-usd" color="white"  size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Add Funds</Text>
+                                                                                    </TouchableOpacity>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="settings-outline" color="white"  size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Manage</Text>
+                                                                                    </TouchableOpacity>
+                                                                                </View>
+                                                                                
+                                                                            </ImageBackground>
+                                                                      
+                                                                    );
                                                                 case 1:
-                                                                        return <Image source={require("../../assets/paycards/masterCard.png")} height={600} width={350}/>        
+                                                                    return (
+                                                                        
+                                                                            <ImageBackground source={require("../../assets/paycards/masterCard.png")} style={styles.backgroundImage} resizeMode="cover">
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between'}}>
+                                                                                    <Image style={{height:80, width:150}} source={require('../../assets/paycards/masterLogo.png')}/>
+                                                                                    <Text style={{color:'white', fontSize:24}}>x1234</Text>
+                                                                                </View>
+                                                                                <View style={{ justifyContent:'center', alignItems:'center'}}>
+                                                                                    
+                                                                                    <Icon name="qr-code-outline" color="white" size={200}/>
+                                                                                </View>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="checkmark-circle-outline" color="white" size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Make Default</Text>
+                                                                                    </TouchableOpacity>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="settings-outline" color="white"  size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Manage</Text>
+                                                                                    </TouchableOpacity>
+                                                                                </View>
+                                                                            </ImageBackground>
+                                                                        
+                                                                    );
                                                                     
                                                                 case 2:
-                                                                    return <Image source={require("../../assets/paycards/visaCard.png")} height={600} width={350}/>        
+                                                                    return (
+                                                                        
+                                                                            <ImageBackground source={require("../../assets/paycards/visaCard.png")} style={styles.backgroundImage}  resizeMode="cover">
+                                                                                 <View style={{ flexDirection:'row', justifyContent:'space-between'}}>
+                                                                                    <Image style={{height:80, width:150}} source={require('../../assets/paycards/visaLogo.png')}/>
+                                                                                    <Text style={{color:'white', fontSize:24}}>x4321</Text>
+                                                                                </View>
+                                                                                <View style={{ justifyContent:'center', alignItems:'center'}}>
+                                                                                    
+                                                                                    <Icon name="qr-code-outline" color="white" size={200}/>
+                                                                                </View>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="checkmark-circle-outline" color="white" size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Make Default</Text>
+                                                                                    </TouchableOpacity>
+                                                                                    <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
+                                                                                        <Icon name="settings-outline" color="white"  size={15}/>
+                                                                                        <Text style={{color:'white', fontSize:15}}>Manage</Text>
+                                                                                    </TouchableOpacity>
+                                                                                </View>
+                                                                            </ImageBackground>
+                                                                        
+                                                                    );
                                                                     
                                                                 default:
                                                                     break;
@@ -136,6 +196,14 @@ const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#F6F2ED'
     },
+    backgroundImage: {
+        flex: 1, // Fullscreen coverage
+        justifyContent: 'space-evenly',
+        padding:10,
+        // alignItems: 'center',
+        // width: '100%',
+        // height: '100%',
+      },
     renderItem1_parentView: {
         // backgroundColor: "#ffffff",
         borderRadius: 18,
@@ -178,4 +246,7 @@ const styles = StyleSheet.create({
         color: "blue",
         fontWeight: "bold",
      },
+     carouselContainer:{
+        borderRadius:14
+     }
 });
