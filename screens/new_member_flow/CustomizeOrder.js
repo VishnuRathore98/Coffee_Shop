@@ -343,6 +343,7 @@ import {
             <TouchableOpacity
               style={{
                   flex:1,
+                  elevation:4,
                 backgroundColor: GlobalStyles.colors.signUp.fillColor2,
                 padding:10,
                 height: 60,

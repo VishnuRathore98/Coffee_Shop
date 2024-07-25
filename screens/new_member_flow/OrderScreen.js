@@ -1,306 +1,98 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import {
-  useFonts,
-  Poppins_400Regular,
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
-import { useState } from "react";
-import Icon from "react-native-vector-icons/Ionicons";
-import { Picker } from "@react-native-picker/picker";
-import { GlobalStyles } from "../../constants/styles";
+import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
-const cupSizeOptions = [
-  { label: "Small", value: "1" },
-  { label: "Medium", value: "2" },
-  { label: "Large", value: "3" },
-];
-
-const addInOptions = [
-  { label: "Normal Ice", value: "1" },
-  { label: "", value: "" },
-  { label: "", value: "" },
-];
-
-const creamerOptions = [
-  { label: "Oatmilk", value: "1" },
-  { label: "", value: "" },
-  { label: "", value: "" },
-];
-
-export default function OrderScreen() {
-  const [cupSize, setCupSize] = useState("");
-  const [addIn, setAddIn] = useState("");
-  const [creamer, setCreamer] = useState("");
-  
-  let [fonstLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_500Medium,
-    Poppins_600SemiBold,
-  });
-  if (!fonstLoaded) {
-    return <AppLoading />;
-  } else {
+export default function OrderScreen(){
     return (
-      <View style={styles.rootContainer}>
-        <View style={{ backgroundColor: "#4E8D7C", height: 153 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              style={{ width: 100, height: 120 }}
-              source={require("../../assets/coldcoffee.png")}
-            />
-            <Text
-              style={{
-                fontSize: 16,
-                color: "white",
-                fontFamily: "Poppins_500Medium",
-              }}
-            >
-              Pumpkin Spice Lattee
-            </Text>
-          </View>
+        <ScrollView>
+        <View style={styles.rootContainer}>
+            {/* Drinks */}
+
+<View style={styles.drinksContainer}>
+    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+        <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>Drinks</Text>
+        <TouchableOpacity><Text style={{color:'#4E8D7C', fontSize:14,  fontFamily:"Poppins_600SemiBold"}}>See all</Text></TouchableOpacity>
+    </View>
+    <View>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{ width:110, height:120}} source={require('../../assets/hotcoffee.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Coffees</Text></TouchableOpacity>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/hottea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Teas</Text></TouchableOpacity>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/hotdrink.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Drinks</Text></TouchableOpacity>
         </View>
-        <View style={{ flex: 1, margin: 12 }}>
-          <View style={{ padding: 12 }}>
-            <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
-              What's included
-            </Text>
-          </View>
-
-            <ScrollView>
-
-          <View>
-            <View style={{ padding: 20 }}>
-              <Text style={styles.textStyle}>Cup Size</Text>
-              <View style={{backgroundColor:'white', height:50, justifyContent:'center', padding:10, borderRadius:5}}>
-              <Picker 
-                selectedValue={cupSize} 
-                onValueChange={(itemValue, itemIndex) => setCupSize(itemValue)}>
-                    <Picker.Item  label="Small" value="1" />
-                    <Picker.Item  label="Medium" value="2" />
-                    <Picker.Item  label="Large" value="3" />
-                </Picker>
-                </View>
-            </View>
-            <View style={{ padding: 20 }}>
-              <Text style={styles.textStyle}>Add-Ins</Text>
-              <View style={{backgroundColor:'white', height:50, justifyContent:'center', padding:10, borderRadius:5}}>
-              <Picker 
-                selectedValue={addIn} 
-                onValueChange={(itemValue, itemIndex) => setAddIn(itemValue)}>
-                    <Picker.Item  label="Normal Ice" value="1" />
-                    <Picker.Item  label="Cinnamon" value="2" />
-                    <Picker.Item  label="Nutmeg" value="3" />
-                    <Picker.Item  label="Cocoa Powder" value="4" />
-                </Picker>
-              </View>
-            </View>
-            <View style={{ padding: 20 }}>
-              <Text style={styles.textStyle}>Sweetner</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  backgroundColor:'white', height:50, alignItems:'center', padding:10, borderRadius:5
-                }}
-              >
-                <Text>Splenda packet</Text>
-                <View>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: 40,
-                      width: 140,
-                      borderRadius: 8,
-                      flexDirection: "row",
-                      backgroundColor: "white",
-                      elevation: 2,
-                    }}
-                  >
-                    <TouchableOpacity
-                      style={{
-                        flex: 1,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="remove-outline" size={18} color="#9C4400" />
-                    </TouchableOpacity>
-                    <View
-                      style={{
-                        borderRadius: 4,
-                        height: 24,
-                        width: 36,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontSize: 16,
-                      }}
-                    >
-                      <Text>0</Text>
-                    </View>
-                    <TouchableOpacity
-                      style={{
-                        flex: 1,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="add-outline" size={18} color="#9C4400" />
-                    </TouchableOpacity>
-                  </View>
-                  <View></View>
-                </View>
-              </View>
-            </View>
-
-            <View style={{ padding: 20 }}>
-              <Text style={styles.textStyle}>Flavor</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  backgroundColor:'white', height:50, alignItems:'center', padding:10, borderRadius:5
-                }}
-              >
-                <Text>Pumpkin Spice</Text>
-                <View>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: 40,
-                      width: 140,
-                      borderRadius: 8,
-                      flexDirection: "row",
-                      backgroundColor: "white",
-                      elevation: 2,
-                    }}
-                  >
-                    <TouchableOpacity
-                      style={{
-                        flex: 1,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="remove-outline" size={18} color="#9C4400" />
-                    </TouchableOpacity>
-                    <View
-                      style={{
-                        borderRadius: 4,
-                        height: 24,
-                        width: 36,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontSize: 16,
-                      }}
-                    >
-                      <Text>0</Text>
-                    </View>
-                    <TouchableOpacity
-                      style={{
-                        flex: 1,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="add-outline" size={18} color="#9C4400" />
-                    </TouchableOpacity>
-                  </View>
-                  <View></View>
-                </View>
-              </View>
-            </View>
-            <View style={{ padding: 20 }}>
-              <Text style={styles.textStyle}>Creamer</Text>
-              <View style={{backgroundColor:'white', height:50, justifyContent:'center', padding:10, borderRadius:5}}>
-              <Picker 
-                selectedValue={creamer} 
-                onValueChange={(itemValue, itemIndex) => setCreamer(itemValue)}>
-                    <Picker.Item  label="Oatmilk" value="1" />
-                    <Picker.Item  label="Whole milk" value="2" />
-                    <Picker.Item  label="skim milk" value="3" />
-                    <Picker.Item  label="Almond milk" value="4" />
-                    <Picker.Item  label="soy milk" value="5" />
-                    <Picker.Item  label="coconut milk" value="6" />
-                </Picker>
-              </View>
-            </View>
-          <View style={{padding:20, flexDirection:'row', }}>            
-          
-          <TouchableOpacity
-            style={{
-                flex:1,
-              backgroundColor: GlobalStyles.colors.signUp.fillColor1,
-              padding:10,
-              height: 60,
-              borderRadius: 22,
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight:20
-            }}>
-
-            <Text
-              style={{
-                color: "white",
-                fontSize: 14,
-                fontFamily: "Poppins_500Medium",
-              }}>Add to Cart</Text>
-
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={{
-                flex:1,
-              backgroundColor: GlobalStyles.colors.signUp.fillColor2,
-              padding:10,
-              height: 60,
-              borderRadius: 22,
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-
-            <Text
-              style={{
-                color: "white",
-                fontSize: 14,
-                fontFamily: "Poppins_500Medium",
-              }}>Customize <Icon name="create-outline" size={14}/> </Text>
-
-          </TouchableOpacity>
-          </View>
-          </View>
-
-          </ScrollView>
+        
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/frappucino.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Frappucino</Text></TouchableOpacity>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/coldcoffee.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Cold Coffees</Text></TouchableOpacity>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/icedtea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Iced Teas</Text></TouchableOpacity>
         </View>
-      </View>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5   }}><Image style={{width:110, height:120}} source={require('../../assets/colddrink.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Cold Drinks</Text></TouchableOpacity>
+            
+        </View>
+    </View>
+</View>
+
+{/* Food */}
+
+<View style={styles.drinksContainer}>
+                <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                    <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>Food</Text>
+                    <TouchableOpacity><Text style={{color:'#4E8D7C', fontSize:14,  fontFamily:"Poppins_600SemiBold"}}>See all</Text></TouchableOpacity>
+                </View>
+                <View>
+                    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/hotbreakfast.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Breakfast</Text></TouchableOpacity>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/bakery.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Bakery</Text></TouchableOpacity>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/treats.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Treats</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+
+{/* At Home Coffee */}
+
+<View style={styles.drinksContainer}>
+                <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                    <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>At Home Coffee</Text>
+                    <TouchableOpacity><Text style={{color:'#4E8D7C', fontSize:14,  fontFamily:"Poppins_600SemiBold"}}>See all</Text></TouchableOpacity>
+                </View>
+                <View>
+                    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/wholebean.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Whole Bean</Text></TouchableOpacity>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/tea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Tea</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+
+{/* Merchandise */}
+
+<View style={styles.drinksContainer}>
+                <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                    <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>Merchandise</Text>
+                    <TouchableOpacity><Text style={{color:'#4E8D7C', fontSize:14,  fontFamily:"Poppins_600SemiBold"}}>See all</Text></TouchableOpacity>
+                </View>
+                <View>
+                    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/personalizedcoldcup.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Cold Cup</Text></TouchableOpacity>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/personalizedtumblers.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Tumblers</Text></TouchableOpacity>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/personalizedmugs.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Mugs</Text></TouchableOpacity>
+                    </View>
+                    
+                    <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                        <TouchableOpacity style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/other.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Other</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+
+        </View>
+        </ScrollView>
     );
-  }
 }
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    justifyContent: "flex-start",
-    marginTop: 40,
-  },
-  textStyle: {
-    fontSize: 16,
-    fontFamily: "Poppins_500Medium",
-  },
+    rootContainer:{
+        flex:1,
+        backgroundColor:'#F6F2ED'
+    },
+    drinksContainer:{
+        flex:1,
+        margin:18,
+    }
 });

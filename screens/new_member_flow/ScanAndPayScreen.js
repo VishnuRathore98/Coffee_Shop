@@ -1,16 +1,14 @@
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import {Poppins_400Regular} from "@expo-google-fonts/poppins";
+import { Poppins_400Regular, Poppins_500Medium, Poppins_200ExtraLight} from "@expo-google-fonts/poppins";
 import { useState, useRef } from "react";
 import Icon  from "react-native-vector-icons/Ionicons";
 import Carousel from 'react-native-reanimated-carousel';
-import { useSharedValue } from "react-native-reanimated";
 
 
 export default function ScanAndPayScreen(){
     const [scanAndPaySelected, setScanAndPaySelected] = useState(true);
     const [rewardSelected, setRewardSelected] = useState(false);
     const ref = useRef(null);
-    const scrollOffsetValue = useSharedValue(0);
 
     const views1 = [
         {
@@ -58,33 +56,21 @@ export default function ScanAndPayScreen(){
             <Text style={{fontSize:20, fontFamily:'Poppins_400Regular'}}>Rewards Only</Text>
             </TouchableOpacity>
             </View>
-            <View style={{}}>
+            
                 {
                     scanAndPaySelected
-                ?
+                    ?
                     
-                        // Carousel will go in here
-                        <View style={{}}>
+                        // Carousel will go in here                        
 
                         <Carousel
                                 vertical={ false}
                                 width={360}
                                 height= {560}
-                                // loop
-                                // enabled // Default is true, just for demo
-                                ref={ref}
-                                // defaultScrollOffsetValue={scrollOffsetValue}
-                                // testID={"xxx"}
+                                ref={ref}                                                                
                                 style={{borderRadius:30, }}
-                                autoPlay={false}
-                                // autoPlayInterval={isFast ? 100 : 2000}
-                                data={views1}
-                                // onScrollStart={()=>{console.log('===1')}}
-                                // onScrollEnd={()=>{console.log('===2')}}
-                                // onConfigurePanGesture={g => g.enabled(false)}
-                                // pagingEnabled={true}
-                                // onSnapToItem={index => console.log("current index:", index)}
-                                // "../../assets/paycards/defaultCard.png"
+                                autoPlay={false}                                
+                                data={views1}                                
                                 renderItem={({index, item})=>{
                                                         console.log(index, item.img);
                                                         
@@ -94,15 +80,15 @@ export default function ScanAndPayScreen(){
                                                                         
                                                                             <ImageBackground source={require("../../assets/paycards/defaultCard.png")} style={styles.backgroundImage} resizeMode="cover">        
                                                                                 
-                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', paddingHorizontal:50}}>
-                                                                                    <Text style={{color:'white', fontSize:24}}>Rewards</Text>
-                                                                                    <Text style={{color:'white', fontSize:24}}><Icon name="star-half-outline" size={24}/>1300</Text>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', marginHorizontal:40}}>
+                                                                                    <Text style={{color:'white', fontSize:24, fontFamily:'Poppins_500Medium'}}>Rewards</Text>
+                                                                                    <Text style={{color:'white', fontSize:24, fontFamily:'Poppins_500Medium'}}><Icon name="star-half-outline" size={24}/>1300</Text>
                                                                                 </View>
-                                                                                <View style={{ justifyContent:'center', alignItems:'center', paddingHorizontal:50}}>
-                                                                                    <Text style={{color:'white', fontSize:50}}>$52.17</Text>
+                                                                                <View style={{ justifyContent:'center', alignItems:'center'}}>
+                                                                                    <Text style={{color:'white', fontSize:50, fontFamily:'Poppins_500Medium'}}>$52.17</Text>
                                                                                     <Icon name="qr-code-outline" color="white" size={200}/>
                                                                                 </View>
-                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', paddingHorizontal:50}}>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', marginHorizontal:50}}>
                                                                                     <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
                                                                                         <Icon name="logo-usd" color="white"  size={15}/>
                                                                                         <Text style={{color:'white', fontSize:15}}>Add Funds</Text>
@@ -120,15 +106,15 @@ export default function ScanAndPayScreen(){
                                                                     return (
                                                                         
                                                                             <ImageBackground source={require("../../assets/paycards/masterCard.png")} style={styles.backgroundImage} resizeMode="cover">
-                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between'}}>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                                                                                     <Image style={{height:80, width:150}} source={require('../../assets/paycards/masterLogo.png')}/>
-                                                                                    <Text style={{color:'white', fontSize:24}}>x1234</Text>
+                                                                                    <Text style={{color:'white', fontSize:24, fontFamily:'Poppins_500Medium'}}>x1234</Text>
                                                                                 </View>
                                                                                 <View style={{ justifyContent:'center', alignItems:'center'}}>
                                                                                     
                                                                                     <Icon name="qr-code-outline" color="white" size={200}/>
                                                                                 </View>
-                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', marginHorizontal:50}}>
                                                                                     <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
                                                                                         <Icon name="checkmark-circle-outline" color="white" size={15}/>
                                                                                         <Text style={{color:'white', fontSize:15}}>Make Default</Text>
@@ -146,15 +132,15 @@ export default function ScanAndPayScreen(){
                                                                     return (
                                                                         
                                                                             <ImageBackground source={require("../../assets/paycards/visaCard.png")} style={styles.backgroundImage}  resizeMode="cover">
-                                                                                 <View style={{ flexDirection:'row', justifyContent:'space-between'}}>
+                                                                                 <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                                                                                     <Image style={{height:80, width:150}} source={require('../../assets/paycards/visaLogo.png')}/>
-                                                                                    <Text style={{color:'white', fontSize:24}}>x4321</Text>
+                                                                                    <Text style={{color:'white', fontSize:24, fontFamily:'Poppins_500Medium'}}>x4321</Text>
                                                                                 </View>
                                                                                 <View style={{ justifyContent:'center', alignItems:'center'}}>
                                                                                     
                                                                                     <Icon name="qr-code-outline" color="white" size={200}/>
                                                                                 </View>
-                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                                                                                <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', marginHorizontal:50}}>
                                                                                     <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}> 
                                                                                         <Icon name="checkmark-circle-outline" color="white" size={15}/>
                                                                                         <Text style={{color:'white', fontSize:15}}>Make Default</Text>
@@ -176,15 +162,15 @@ export default function ScanAndPayScreen(){
                                                     }}
                             />
 
-                    </View>
                     
-                :
-                    <View style={{justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{fontSize:50}}><Icon name="star-half-outline" size={50}/>1300</Text>
-                        <Icon name="qr-code-outline" size={200}/>
-                    </View>
+                    
+                    :
+                        <View style={{justifyContent:'center', alignItems:'center', marginTop:100}}>
+                            <Text style={{fontSize:50}}><Icon name="star-half-outline" size={50}/>1300</Text>
+                            <Icon name="qr-code-outline" size={200}/>
+                        </View>
                 }
-            </View>
+            
         </View>
     );
 }
@@ -198,8 +184,10 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1, // Fullscreen coverage
-        justifyContent: 'space-evenly',
-        padding:10,
+        justifyContent: 'space-between',
+        paddingTop:40,
+        paddingBottom:60,
+        paddingHorizontal:20,
         // alignItems: 'center',
         // width: '100%',
         // height: '100%',
