@@ -37,7 +37,7 @@ import {
     { label: "", value: "" },
   ];
   
-  export default function CustomizeOrder() {
+  export default function CustomizeOrder({navigation}) {
     const [cupSize, setCupSize] = useState("");
     const [addIn, setAddIn] = useState("");
     const [creamer, setCreamer] = useState("");
@@ -341,6 +341,7 @@ import {
 {/* Button */}
             <View style={{padding:20, }}>            
             <TouchableOpacity
+            onPress={()=>navigation.navigate('ProductDetailScreen')}
               style={{
                   flex:1,
                   elevation:4,

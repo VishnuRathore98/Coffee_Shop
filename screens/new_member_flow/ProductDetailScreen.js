@@ -36,7 +36,7 @@ const creamerOptions = [
   { label: "", value: "" },
 ];
 
-export default function ProductDetailScreen() {
+export default function ProductDetailScreen({navigation}) {
   const [cupSize, setCupSize] = useState("");
   const [addIn, setAddIn] = useState("");
   const [creamer, setCreamer] = useState("");
@@ -246,6 +246,7 @@ export default function ProductDetailScreen() {
           <View style={{padding:20, flexDirection:'row', }}>            
            
           <TouchableOpacity
+          onPress={()=>navigation.navigate('CartScreen')}
             style={{
                 flex:1,
                 elevation:4,
@@ -268,6 +269,7 @@ export default function ProductDetailScreen() {
           </TouchableOpacity>
           
           <TouchableOpacity
+             onPress={()=>navigation.navigate('CustomizeOrder')}
             style={{
                 flex:1,
                 elevation:4,

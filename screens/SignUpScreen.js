@@ -21,7 +21,7 @@ import { GlobalStyles } from "../constants/styles";
 
 
 
-export default function SignUpScreen() {
+export default function SignUpScreen({navigation}) {
   let [fontsLoaded] = useFonts({
     Poppins_800ExtraBold,
     Poppins_400Regular,
@@ -33,7 +33,7 @@ export default function SignUpScreen() {
     return (
       <View style={styles.rootContainer}>
         <View style={styles.oneFifth}>
-          <TouchableOpacity style={styles.skipButton}>
+          <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.skipButton}>
             <Text>Skip</Text>
           </TouchableOpacity>
           <View style={styles.imageContainer}>
@@ -110,13 +110,13 @@ export default function SignUpScreen() {
               <TextInput style={styles.textInput} placeholder="Type your password"></TextInput>
             </View>
           </View>
-          <View style={styles.userInteractionContainer}>
+          <View style={[styles.userInteractionContainer,{marginBottom:8}]}>
             
             <Pressable android_ripple={{color:'#F6F2ED' }} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>REGISTER</Text></Pressable>
             
             <Text style={{color:GlobalStyles.colors.signUp.fillColor1, fontSize:14, fontFamily:'Poppins_400Regular'}}>Already have an account?</Text>
             
-            <Pressable android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>SIGN IN</Text></Pressable>
+            <Pressable onPress={()=>navigation.navigate('SignIn')} android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>SIGN IN</Text></Pressable>
             
           </View>
           </ScrollView>

@@ -1,11 +1,27 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Image, Switch, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, Switch, ScrollView, TouchableOpacity, Pressable, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useFonts, Poppins_600SemiBold, Poppins_400Regular, Poppins_500Medium } from "@expo-google-fonts/poppins";
+import { GlobalStyles } from "../../constants/styles";
 
-export default function AccountScreen() {
+export default function AccountScreen({navigation}) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  function logoutPopUp(){
+    Alert.alert("LogOut", "Are you sure you want to logout?", [
+      {
+        text:'Yes',
+        onPress:()=>navigation.navigate('SignIn'),
+
+      },
+      {
+        text:'No',
+        // onPress:()=>
+        style:'cancel'
+      }
+    ]);
+  }
 
   return (
     <View style={styles.rootContainer}>
@@ -192,6 +208,9 @@ export default function AccountScreen() {
             {/* <Icon /> */}
           </View>
         </View>
+        <View style={{padding:10,}}>
+        <Pressable onPress={logoutPopUp} android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:16, fontFamily:'Poppins_400Regular'}}>LogOut</Text></Pressable>
+        </View>
       </View>
       </ScrollView>
     </View>
@@ -205,4 +224,13 @@ const styles = StyleSheet.create({
     // alignItems:'center',
     backgroundColor: "#F6F2ED",
   },
+  button:{
+    
+    height:60,
+    borderRadius:22,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor: GlobalStyles.colors.signUp.fillColor1,
+
+  }
 });

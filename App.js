@@ -28,9 +28,11 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 
 // Bottom Tab Navigator
@@ -124,10 +126,8 @@ function DrawerNavigation() {
       <Drawer.Screen name="OrderScreen" component={OrderScreen} />
       <Drawer.Screen name="CartScreen" component={CartScreen} />
       <Drawer.Screen name="CheckOutScreen" component={CheckOutScreen} />
-      <Drawer.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
       <Drawer.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
       <Drawer.Screen name="ReceiptScreen" component={ReceiptScreen} />
-      <Drawer.Screen name="CustomizeOrder" component={CustomizeOrder} />
     </Drawer.Navigator>
   );
 }
@@ -137,8 +137,17 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        
-        <DrawerNavigation />
+        <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen}/>
+          <Stack.Screen name="HomeScreen" component={DrawerNavigation}/>
+          <Stack.Screen name="ScreenOne" component={ScreenOne}/>
+          <Stack.Screen name="ScreenTwo" component={ScreenTwo}/>
+          <Stack.Screen name="ScreenThree" component={ScreenThree}/>
+          <Stack.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
+          <Stack.Screen name="CustomizeOrder" component={CustomizeOrder} />
+          <Stack.Screen name="CartScreen" component={CartScreen} /> 
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );

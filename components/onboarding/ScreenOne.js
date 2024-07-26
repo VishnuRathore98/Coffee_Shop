@@ -9,7 +9,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { GlobalStyles } from "../../constants/styles";
 
-export default function ScreenOne() {
+export default function ScreenOne({navigation}) {
   let [fontsLoaded] = useFonts({
     Poppins_800ExtraBold,
     Poppins_400Regular,
@@ -21,7 +21,7 @@ export default function ScreenOne() {
   } else {
     return (
       <View style={styles.rootContainer}>
-            <TouchableOpacity style={styles.skipButton}>
+            <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.skipButton}>
               <Text>Skip</Text>
             </TouchableOpacity>
         <View style={styles.imageContainer}>
@@ -41,7 +41,7 @@ export default function ScreenOne() {
         </View>
         <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', paddingHorizontal:20}}>
             <Image source={require('./beans1.png')} style={{height:40, width:104}}/>
-        <Pressable android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>NEXT</Text></Pressable>
+        <Pressable onPress={()=>navigation.navigate('ScreenTwo')} android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>NEXT</Text></Pressable>
         </View>
       </View>
     );

@@ -20,7 +20,7 @@ import {
   
   
   
-  export default function SignInScreen() {
+  export default function SignInScreen({navigation}) {
     let [fontsLoaded] = useFonts({
       Poppins_800ExtraBold,
       Poppins_400Regular,
@@ -32,7 +32,7 @@ import {
       return (
         <View style={styles.rootContainer}>
           <View style={styles.oneFifth}>
-            <TouchableOpacity style={styles.skipButton}>
+            <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.skipButton}>
               <Text>Skip</Text>
             </TouchableOpacity>
             <View style={styles.imageContainer}>
@@ -97,7 +97,7 @@ import {
             </View>
             <View style={styles.userInteractionContainer}>
               
-                <Pressable android_ripple={{color:'#F6F2ED' }} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>LOGIN</Text></Pressable>
+                <Pressable onPress={()=>navigation.navigate('ScreenOne')} android_ripple={{color:'#F6F2ED' } } style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>LOGIN</Text></Pressable>
             <View style={{flexDirection:'row'}}>
                 <Text style={{color:'#4E8D7C', fontSize:16, fontFamily:'Poppins_400Regular', marginRight:10}}>Forgot your password?</Text>
                 <TouchableOpacity>
@@ -106,7 +106,7 @@ import {
             </View>
                 <Text style={{color:'#6C6B6B', fontSize:14, fontFamily:'Poppins_400Regular'}}>Don't have an account?</Text>
               
-                <Pressable android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>CREATE NEW ACCOUNT</Text></Pressable>
+                <Pressable onPress={()=>navigation.navigate('SignUp')} android_ripple={{color:'#F6F2ED'}} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>CREATE NEW ACCOUNT</Text></Pressable>
               
             </View>
             </ScrollView>
