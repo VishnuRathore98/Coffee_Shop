@@ -275,6 +275,7 @@ export default function CheckOutScreen({ navigation }) {
             </View>
           </View>
           <TouchableOpacity
+            onPress={()=>navigation.navigate('TrackOrderScreen')}
             style={{
               backgroundColor: GlobalStyles.colors.signUp.fillColor1,
               marginVertical: 24,

@@ -36,7 +36,8 @@ const creamerOptions = [
   { label: "", value: "" },
 ];
 
-export default function ProductDetailScreen({navigation}) {
+export default function ProductDetailScreen({navigation,route}) {
+  console.log(route.params);
   const [cupSize, setCupSize] = useState("");
   const [addIn, setAddIn] = useState("");
   const [creamer, setCreamer] = useState("");
@@ -51,27 +52,34 @@ export default function ProductDetailScreen({navigation}) {
   } else {
     return (
       <View style={styles.rootContainer}>
-        <View style={{ backgroundColor: "#4E8D7C", height: 153 }}>
+        <View style={{ backgroundColor: "#4E8D7C", height: 153, justifyContent:'center', alignItems:'center' }}>
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-evenly",
-              alignItems: "center",
+              justifyContent: "center",
+              alignItems:'center'
+              
             }}
           >
+            {/* <View style={{justifyContent:'center', alignItems:'center'}}> */}
             <Image
-              style={{ width: 100, height: 120 }}
-              source={require("../../assets/coldcoffee.png")}
+              style={{ width: 100, height: 120,}}
+              source={{uri:route.params.img}}//"../../assets/hotcoffee.png"
             />
+            {/* </View> */}
+            {/* <View style={{justifyContent:'center', alignItems:'center'}}> */}
             <Text
               style={{
                 fontSize: 16,
                 color: "white",
                 fontFamily: "Poppins_500Medium",
+                marginLeft:10,
+                
               }}
             >
-              Pumpkin Spice Lattee
+              {route?.params?.name!==undefined?route.params.name:'Pumpkin Spice Latte'}
             </Text>
+            {/* </View> */}
           </View>
         </View>
         <View style={{ flex: 1, margin: 12 }}>
@@ -246,7 +254,7 @@ export default function ProductDetailScreen({navigation}) {
           <View style={{padding:20, flexDirection:'row', }}>            
            
           <TouchableOpacity
-          onPress={()=>navigation.navigate('CartScreen')}
+          onPress={()=>navigation.navigate('CheckOut')}
             style={{
                 flex:1,
                 elevation:4,
@@ -269,7 +277,7 @@ export default function ProductDetailScreen({navigation}) {
           </TouchableOpacity>
           
           <TouchableOpacity
-             onPress={()=>navigation.navigate('CustomizeOrder')}
+             onPress={()=>navigation.navigate('CustomizeOrder',{name:route.params.name,img:route.params.img})}
             style={{
                 flex:1,
                 elevation:4,

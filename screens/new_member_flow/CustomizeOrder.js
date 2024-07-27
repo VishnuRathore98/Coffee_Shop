@@ -37,7 +37,7 @@ import {
     { label: "", value: "" },
   ];
   
-  export default function CustomizeOrder({navigation}) {
+  export default function CustomizeOrder({navigation,route}) {
     const [cupSize, setCupSize] = useState("");
     const [addIn, setAddIn] = useState("");
     const [creamer, setCreamer] = useState("");
@@ -53,33 +53,34 @@ import {
     } else {
       return (
         <View style={styles.rootContainer}>
-          <View style={{ backgroundColor: "#4E8D7C", height: 153 }}>
+          <View style={{ backgroundColor: "#4E8D7C", height: 153, justifyContent:'center' }}>
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "space-evenly",
+                justifyContent: "center",
                 alignItems: "center",
               }}
             >
               <Image
                 style={{ width: 100, height: 120 }}
-                source={require("../../assets/coldcoffee.png")}
+                source={{uri:route.params.img}}
               />
               <Text
                 style={{
                   fontSize: 16,
                   color: "white",
                   fontFamily: "Poppins_500Medium",
+                  marginLeft:10,
                 }}
               >
-                Pumpkin Spice Lattee
+                {route.params.name}
               </Text>
             </View>
           </View>
             <ScrollView>
           <View style={{ flex: 1, margin: 12 }}>
 
-            <TouchableOpacity style={{ padding: 12, flexDirection:'row'}}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{name:route.params.name,img:route.params.img})} style={{ padding: 12, flexDirection:'row'}}>
                 <View style={{ justifyContent:'center', alignItems:'center', marginRight:6}}><Icon name="chevron-back" size={16}/></View>
                 <View style={{ justifyContent:'center', alignItems:'center'}}><Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold"}}>Done Customizing</Text></View>
             </TouchableOpacity>
@@ -341,7 +342,7 @@ import {
 {/* Button */}
             <View style={{padding:20, }}>            
             <TouchableOpacity
-            onPress={()=>navigation.navigate('ProductDetailScreen')}
+            onPress={()=>navigation.navigate('ProductDetailScreen',{name:route.params.name,img:route.params.img})}
               style={{
                   flex:1,
                   elevation:4,

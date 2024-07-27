@@ -7,6 +7,7 @@ import {
     TextInput,
     Pressable,
     ScrollView,
+    Alert,
   } from "react-native";
   import {
     useFonts,
@@ -17,10 +18,46 @@ import {
   import AppLoading from "expo-app-loading";
   
   import { GlobalStyles } from "../constants/styles";
+import { useState } from "react";
+import axios from "axios";
   
   
   
   export default function SignInScreen({navigation}) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function emailHandler(text){
+      setEmail(text);
+      // console.log(text);
+    }
+
+    function passwordHandler(text){
+      setPassword(text);
+      // console.log(text);
+    }
+
+    async function loginUser(){
+      try{
+      const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+'AIzaSyCcqcUQ4pwUfXcK_RMBVkOpBFaTezpqQag',
+                        {
+                          email:email,
+                          password:password,
+                        });
+      // console.log(response);
+      if (response.data.email==email) {
+        navigation.navigate('ScreenOne');
+      } else {
+        Alert.alert('Login Failed','Incorrect email or password')
+      }
+    }catch(e){
+      
+      Alert.alert('Error', 'User not registered');
+      console.log("Response:",response);
+      console.log("Error:",e);
+    }
+    }
+
     let [fontsLoaded] = useFonts({
       Poppins_800ExtraBold,
       Poppins_400Regular,
@@ -77,9 +114,9 @@ import {
                     fontFamily: "Poppins_600SemiBold",
                   }}
                 >
-                  Username
+                  Email
                 </Text>
-                <TextInput style={styles.textInput} placeholder="Enter username"></TextInput>
+                <TextInput onChangeText={(text)=>emailHandler(text)} style={styles.textInput} placeholder="Enter your email"></TextInput>
               </View>
               <View>
                 <Text
@@ -92,12 +129,12 @@ import {
                 >
                   Password
                 </Text>
-                <TextInput style={styles.textInput} placeholder="Type your password"></TextInput>
+                <TextInput onChangeText={(text)=>passwordHandler(text)} style={styles.textInput} placeholder="Type your password"></TextInput>
               </View>
             </View>
             <View style={styles.userInteractionContainer}>
               
-                <Pressable onPress={()=>navigation.navigate('ScreenOne')} android_ripple={{color:'#F6F2ED' } } style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>LOGIN</Text></Pressable>
+                <Pressable onPress={loginUser} android_ripple={{color:'#F6F2ED' } } style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>LOGIN</Text></Pressable>
             <View style={{flexDirection:'row'}}>
                 <Text style={{color:'#4E8D7C', fontSize:16, fontFamily:'Poppins_400Regular', marginRight:10}}>Forgot your password?</Text>
                 <TouchableOpacity>

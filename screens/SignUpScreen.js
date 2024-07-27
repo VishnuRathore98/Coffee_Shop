@@ -8,6 +8,8 @@ import {
   Button,
   Pressable,
   ScrollView,
+  Alert,
+  ToastAndroid,
 } from "react-native";
 import {
   useFonts,
@@ -19,9 +21,57 @@ import AppLoading from "expo-app-loading";
 
 import { GlobalStyles } from "../constants/styles";
 
+import axios from "axios";
+import { useState } from "react";
+
 
 
 export default function SignUpScreen({navigation}) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  
+  async function createUser(){
+    try{
+          const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+'AIzaSyCcqcUQ4pwUfXcK_RMBVkOpBFaTezpqQag',
+                            {
+                              // username:username,
+                              email:email,
+                              password:password,
+                              // username:username,
+                            });
+            console.log(response.data.email);
+
+          // console.log(response.data);
+          if(response.data.email == email){
+            Alert.alert('Success','User successfully created',[{onPress:()=>navigation.navigate('SignIn')}]);
+            console.log("success");
+          }
+          else{
+            Alert.alert('Failure!','User not created, please try again.');
+            console.log(response.data);
+          }
+        }catch(e){
+          Alert.alert('Error','User already registered.');
+          console.log(e);
+    }
+  }
+
+
+  function emailHandler(text){
+    setEmail(text);
+    // console.log(email);
+  }
+
+  function passwordHandler(text){
+    setPassword(text);
+    // console.log(password);
+  }
+
+  // function usernameHandler(text){
+  //   setUsername(text);
+  // }
+
   let [fontsLoaded] = useFonts({
     Poppins_800ExtraBold,
     Poppins_400Regular,
@@ -31,6 +81,7 @@ export default function SignUpScreen({navigation}) {
     <AppLoading />;
   } else {
     return (
+      
       <View style={styles.rootContainer}>
         <View style={styles.oneFifth}>
           <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.skipButton}>
@@ -70,7 +121,7 @@ export default function SignUpScreen({navigation}) {
                 network! don’t forget check out your perks!
               </Text>
             </View>
-            <View>
+            {/* <View>
               <Text
                 style={{
                   marginBottom: 10,
@@ -81,8 +132,8 @@ export default function SignUpScreen({navigation}) {
               >
                 Username
               </Text>
-              <TextInput style={styles.textInput} placeholder="Enter username"></TextInput>
-            </View>
+              <TextInput onChangeText={(text)=>usernameHandler(text)} style={styles.textInput} placeholder="Enter username"></TextInput>
+            </View> */}
             <View>
               <Text
                 style={{
@@ -94,7 +145,7 @@ export default function SignUpScreen({navigation}) {
               >
                 Email or phone number
               </Text>
-              <TextInput style={styles.textInput} placeholder="Type your email or phone number"></TextInput>
+              <TextInput onChangeText={(text)=>emailHandler(text)} keyboardType="email-address" style={styles.textInput} placeholder="Type your email or phone number"></TextInput>
             </View>
             <View>
               <Text
@@ -107,12 +158,12 @@ export default function SignUpScreen({navigation}) {
               >
                 Password
               </Text>
-              <TextInput style={styles.textInput} placeholder="Type your password"></TextInput>
+              <TextInput  onChangeText={(text)=>passwordHandler(text)} keyboardType="default" style={styles.textInput} placeholder="Type your password" passwordRules="minlength: 8;"></TextInput>
             </View>
           </View>
           <View style={[styles.userInteractionContainer,{marginBottom:8}]}>
             
-            <Pressable android_ripple={{color:'#F6F2ED' }} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>REGISTER</Text></Pressable>
+            <Pressable onPress={createUser} android_ripple={{color:'#F6F2ED' }} style={styles.button}><Text style={{color:'#F6F2ED', fontSize:14, fontFamily:'Poppins_400Regular'}}>REGISTER</Text></Pressable>
             
             <Text style={{color:GlobalStyles.colors.signUp.fillColor1, fontSize:14, fontFamily:'Poppins_400Regular'}}>Already have an account?</Text>
             

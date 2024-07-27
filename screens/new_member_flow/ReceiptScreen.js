@@ -8,7 +8,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { GlobalStyles } from "../../constants/styles";
 
-export default function ReceiptScreen() {
+export default function ReceiptScreen({navigation}) {
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_800ExtraBold, Poppins_400Regular});
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -71,7 +71,7 @@ export default function ReceiptScreen() {
             </View>
 
           </View>
-          <TouchableOpacity style={styles.trackButton}>
+          <TouchableOpacity onPress={()=>navigation.navigate('TrackOrderScreen')} style={styles.trackButton}>
             <Text style={styles.trackButtonText}>Track Order</Text>
           </TouchableOpacity>
         </View>

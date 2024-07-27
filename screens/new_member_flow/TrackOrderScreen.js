@@ -3,7 +3,7 @@ import { GlobalStyles } from "../../constants/styles";
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import AppLoading from "expo-app-loading";
 
-export default function TrackOrderScreen() {
+export default function TrackOrderScreen({navigation}) {
   let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_700Bold, });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -77,7 +77,10 @@ export default function TrackOrderScreen() {
             </View>
           </View>
           <View style={{alignItems:'center'}}>
-          <TouchableOpacity style={[styles.orderPickupButton,{width:160}]}>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('ReceiptScreen')}
+            style={[styles.orderPickupButton,{width:160}]
+          }>
             <Text style={styles.pickupButtonText}>Review Receipt</Text>
           </TouchableOpacity>
           </View>

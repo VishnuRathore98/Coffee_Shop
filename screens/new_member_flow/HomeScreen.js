@@ -3,6 +3,7 @@ import Icon  from "react-native-vector-icons/Ionicons";
 import {useFonts, Poppins_600SemiBold, Poppins_500Medium, Poppins_400Regular, Poppins_100Thin, Poppins_300Light} from '@expo-google-fonts/poppins'
 import  AppLoading  from "expo-app-loading";
 import { GlobalStyles } from "../../constants/styles";
+import { GlobalImages } from "../../constants/images";
 
 export default function HomeScreen({navigation}){
     let [fonstLoaded] = useFonts({Poppins_600SemiBold,  Poppins_500Medium, Poppins_400Regular, Poppins_100Thin, Poppins_300Light});
@@ -16,8 +17,8 @@ export default function HomeScreen({navigation}){
             <View style={styles.bannerContainer}>
                 <View style={styles.greetingContainer}>
                     <View>
-                    <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>Good morning!</Text>
-                    <Text style={{fontSize:18, fontFamily:"Poppins_400Regular",}}>Let's get this Coffee <Icon name="cafe" size={20}/></Text>
+                    <Text style={{fontSize:20, fontFamily:"Poppins_600SemiBold"}}>Good {new Date().getHours()<12?"morning":new Date().getHours()<16?"Afternoon":new Date().getHours()<19?"Evening":"Night"}!</Text>
+                    <Text style={{fontSize:18, fontFamily:"Poppins_400Regular",}}>Let's get your {new Date().getHours()<12?"morning":new Date().getHours()<16?"afternoon":new Date().getHours()<19?"evening":"night"} Coffee <Icon name="cafe" size={20}/></Text>
                     </View>
                     <View>
                         <Image style={{ height:62, width:62}} source={require('../../assets/usericon.png')}/>
@@ -38,7 +39,7 @@ export default function HomeScreen({navigation}){
                                 <Image style={{height:80, width:80,}} source={require('../../assets/coffeebag.png')}/>
                             </View>
                         </View>
-                        <View style={{alignItems:'flex-end'}}><TouchableOpacity style={{justifyContent:'center', alignItems:'center', width:90, height:30, borderRadius:20, backgroundColor:GlobalStyles.colors.signUp.fillColor1,}}><Text style={{color:'white'}}>Shop now</Text></TouchableOpacity></View>
+                        <View style={{alignItems:'flex-end'}}><TouchableOpacity onPress={()=>navigation.navigate('OrderScreen')} style={{justifyContent:'center', alignItems:'center', width:90, height:30, borderRadius:20, backgroundColor:GlobalStyles.colors.signUp.fillColor1,}}><Text style={{color:'white'}}>Shop now</Text></TouchableOpacity></View>
                     </View>
                 </View>
             </View>
@@ -52,9 +53,9 @@ export default function HomeScreen({navigation}){
     </View>
     <View>
         <View style={{flexDirection:'row', alignItems:'center', flexWrap:'wrap'}}>
-            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={require('../../assets/hotcoffee.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Coffees</Text></TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/hottea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Teas</Text></TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/hotdrink.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Drinks</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.hotCoffees,name:'Hot Coffees'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={{uri:GlobalImages.hotCoffees}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Coffees</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.hotTeas,name:'Hot Teas'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.hotTeas}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Teas</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.hotDrinks,name:'Hot Drinks'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.hotDrinks}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Drinks</Text></TouchableOpacity>
             
         </View>
     </View>
@@ -69,9 +70,9 @@ export default function HomeScreen({navigation}){
                 </View>
                 <View>
                     <View style={{flexDirection:'row',  alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/hotbreakfast.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Breakfast</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/bakery.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Bakery</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/treats.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Treats</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.hotBreakfast,name:'Hot Breakfast'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={{uri:GlobalImages.hotBreakfast}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Hot Breakfast</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.bakery,name:'Bakery'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.bakery}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Bakery</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.treats,name:'Treats'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.treats}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Treats</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -85,8 +86,8 @@ export default function HomeScreen({navigation}){
                 </View>
                 <View>
                     <View style={{flexDirection:'row',  alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/wholebean.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Whole Bean</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/tea.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Tea</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.wholeBean,name:'Whole Bean'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={{uri:GlobalImages.wholeBean}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Whole Bean</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.tea,name:'Tea'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.tea}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Tea</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -100,9 +101,9 @@ export default function HomeScreen({navigation}){
                 </View>
                 <View>
                     <View style={{flexDirection:'row',  alignItems:'center', flexWrap:'wrap'}}>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={require('../../assets/menu_card/personalizedcoldcup.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium", }}>Personalized Cold Cup</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/personalizedtumblers.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Tumblers</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen')} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={require('../../assets/menu_card/personalizedmugs.png')}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Mugs</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.personalizedColdCup,name:'Personalized Cold Cup'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{ width:110, height:120}} source={{uri:GlobalImages.personalizedColdCup}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium", }}>Personalized Cold Cup</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.personalizedTumblers,name:'Personalized Tumblers'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.personalizedTumblers}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Tumblers</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetailScreen',{img:GlobalImages.personalizedMugs,name:'Personalized Mugs'})} style={{ elevation:2, justifyContent:'center', alignItems:'center', backgroundColor:'white', borderRadius:10, margin:5, maxWidth:108}}><Image style={{width:110, height:120}} source={{uri:GlobalImages.personalizedMugs}}/><Text style={{fontSize:14,  fontFamily:"Poppins_500Medium"}}>Personalized Mugs</Text></TouchableOpacity>
                         
                     </View>
                 </View>

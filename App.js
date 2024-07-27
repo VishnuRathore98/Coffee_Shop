@@ -4,6 +4,9 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Alert,
+  View,
+  Text
 } from "react-native";
 import SignUpScreen from "./screens/SignUpScreen";
 import SignInScreen from "./screens/SignInScreen";
@@ -29,11 +32,26 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
+import { GlobalStyles } from "./constants/styles";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+function logoutPopUp({navigation}){
+  Alert.alert("LogOut", "Are you sure you want to logout?", [
+    {
+      text:'Yes',
+      onPress:()=>navigation.navigate('SignIn'),
+
+    },
+    {
+      text:'No',
+      // onPress:()=>
+      style:'cancel'
+    }
+  ]);
+}
 
 // Bottom Tab Navigator
 function Home({navigation}) {
@@ -85,24 +103,19 @@ function Home({navigation}) {
           ),
         }}
       />
-      {/* <BottomTab.Screen
-        name="Rewards"
-        component={navigation.navigate('')}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Icon name="bowling-ball-outline" size={size} />
-          ),
-        }}
-      /> */}
+      
     </BottomTab.Navigator>
   );
 }
 
 function DrawerNavigation() {
+// TODO: Need to add user profile in drawer, as in account screen.
+// TODO: Need to add icons in drawer.
   const navigation = useNavigation();
 
   return (
     <Drawer.Navigator
+    initialRouteName="Home Tab"
       screenOptions={{
         headerTitleAlign: "center",
         headerTitle: () => (
@@ -112,7 +125,7 @@ function DrawerNavigation() {
           />
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={()=>navigation.navigate('CartScreen')}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Cart')}>
             <Icon
               name="bag-handle-outline"
               size={34}
@@ -120,14 +133,18 @@ function DrawerNavigation() {
             />
           </TouchableOpacity>
         ),
+       drawerStyle:{backgroundColor:'#F6F2ED'},
+
       }}
     >
-      <Drawer.Screen name="Home Tab" component={Home} />
-      <Drawer.Screen name="OrderScreen" component={OrderScreen} />
-      <Drawer.Screen name="CartScreen" component={CartScreen} />
-      <Drawer.Screen name="CheckOutScreen" component={CheckOutScreen} />
-      <Drawer.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
-      <Drawer.Screen name="ReceiptScreen" component={ReceiptScreen} />
+      <Drawer.Screen name="User" component={AccountScreen} options={{drawerLabel:()=>(<View><Text style={{fontSize:20, fontFamily:'Poppins_500Medium',color:'#434343'}}>Welcome,</Text><Text style={{fontSize:20, fontFamily:'Poppins_500Medium',color:'#434343'}}>John</Text></View>),drawerLabelStyle:{fontSize:20,},  drawerIcon:()=>(<Image style={{ height:72, width:72,}} source={require('./assets/usericon.png')}/>), drawerItemStyle:{height:100, justifyContent:'center', }}}/>
+      <Drawer.Screen name="Home Tab" component={Home} options={{drawerIcon:({size})=>(<Icon size={size} name="home-outline"/>)}}/>
+      <Drawer.Screen name="OrderScreen" component={OrderScreen} options={{ drawerLabel:'My Orders', drawerIcon:({size})=>(<Icon size={size} name="fast-food-outline"/>)}}/>
+      <Drawer.Screen name="Cart" component={CartScreen} options={{ drawerLabel:'My Cart', drawerIcon:({size})=>(<Icon size={size} name="cart-outline"/>)}}/>
+      <Drawer.Screen name="CheckOut" component={CheckOutScreen} options={{drawerIcon:({size})=>(<Icon size={size} name="bag-check-outline"/>)}}/>
+      <Drawer.Screen name="TrackOrderScreen" component={TrackOrderScreen} options={{drawerLabel:'Track My Order', drawerIcon:({size})=>(<Icon size={size} name="location-outline"/>)}}/>
+      <Drawer.Screen name="ReceiptScreen" component={ReceiptScreen} options={{drawerLabel:'Order Receipt', drawerIcon:({size})=>(<Icon size={size} name="receipt-outline"/>)}}/>
+      <Drawer.Screen name="Logout" component={Home} listeners={(navigation)=>({drawerItemPress:()=>{logoutPopUp(navigation)}})} options={{ drawerIcon:({size})=>(<Icon size={size} name="log-out-outline"/>), }}/>
     </Drawer.Navigator>
   );
 }
@@ -156,7 +173,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
