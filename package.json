@@ -15,6 +15,7 @@
     "@react-navigation/drawer": "^6.7.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.4.0",
+    "@reduxjs/toolkit": "^2.2.7",
     "@types/react": "~18.2.79",
     "axios": "^1.7.2",
     "expo": "~51.0.20",
@@ -34,6 +35,8 @@
     "react-native-screens": "3.31.1",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^10.1.0",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
     "typescript": "~5.3.3"
   },
   "devDependencies": {
