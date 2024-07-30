@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import {
   useFonts,
@@ -18,6 +19,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { GlobalStyles } from "../../constants/styles";
 import { useDispatch, useSelector } from "react-redux";
+import * as Haptics from 'expo-haptics';
 
 import { addToCart, removeFromCart } from '../../store/redux/store';
 
@@ -46,14 +48,16 @@ export default function ProductDetailScreen({ navigation, route }) {
   const [creamer, setCreamer] = useState("");
   const [sweetner, setSweetner] = useState(0);
   const [flavor, setFlavor] = useState(0);
+  const [itemAdded, setItemAdded] = useState(false);
   // const cartItems = useSelector();
   const dispatch = useDispatch();
 
-  console.log("\nCupSize: " ,cupSize ,"\nAddIn: ",addIn ,"\nCreamer: " ,creamer ,"\nSweetner: " ,sweetner ,"\nflavor: " ,flavor);
+  // console.log("\nCupSize: " ,cupSize ,"\nAddIn: ",addIn ,"\nCreamer: " ,creamer ,"\nSweetner: " ,sweetner ,"\nflavor: " ,flavor);
 
   function addToCartHandler(){
     const cartItem = {
       name:route.params.name,
+      id: Math.floor(Math.random()*10000),
       cupSize:
       {
         item:'Cup Size',
@@ -80,9 +84,14 @@ export default function ProductDetailScreen({ navigation, route }) {
         description:flavor
       }};
     
-    dispatch(addToCart({item:cartItem}));
-    
-    navigation.navigate('CheckOut');
+    if (itemAdded) {
+     navigation.navigate('Cart'); 
+    }else{
+      dispatch(addToCart({item:cartItem}));
+      setItemAdded(true);
+      Haptics.selectionAsync();
+      ToastAndroid.show('Item added to cart.',ToastAndroid.SHORT);
+    }
   }
 
   let [fonstLoaded] = useFonts({
@@ -351,7 +360,7 @@ export default function ProductDetailScreen({ navigation, route }) {
                       fontSize: 14,
                       fontFamily: "Poppins_500Medium",
                     }}>
-                    Add to Cart
+                    {itemAdded?'Go to Cart':'Add to Cart'}
                   </Text>
                 </TouchableOpacity>
 

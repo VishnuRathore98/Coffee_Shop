@@ -8,10 +8,12 @@ const cartSlice = createSlice({
     reducers:{
         addToCart: (state, action)=>{
             state.items.push(action.payload.item)
-            console.log("Inside redux store: ",action.payload.item);
+            // console.log("Inside redux store: ",action.payload.item);
         },
         removeFromCart: (state, action)=>{
-            state.items.splice(state.items.indexOf(action.payload.item.name), 1)
+            state.items.forEach((item,index)=>item.id===action.payload.id?state.items.splice(index,1):"not found");
+            // console.log(state.items.indexOf(action.payload.id));
+            // state.items.splice(state.items.indexOf(action.payload.item.id), 1)
         }
     }
 });
