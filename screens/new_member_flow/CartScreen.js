@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
 import {
   useFonts,
   Poppins_500Medium,
@@ -8,11 +8,44 @@ import AppLoading from "expo-app-loading";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from 'react-native-paper';
 import { addToCart, removeFromCart } from '../../store/redux/store';
+import { GlobalStyles } from "../../constants/styles";
+import { Icon } from 'react-native-vector-icons/Ionicons'
+
 
 
 export default function CartScreen({navigation}) {
+
   const cartItems = useSelector((state) => state.cartItems.items);
   const dispatch = useDispatch();
+  
+  function buyAllButtonHandler(){
+    return(
+      <TouchableOpacity
+              onPress={() => navigation.navigate("CheckOut",{cartItems})}
+              style={{
+                backgroundColor: GlobalStyles.colors.signUp.fillColor1,
+                marginVertical: 24,
+                marginHorizontal: 10,
+                height: 60,
+                borderWidth: 1,
+                borderRadius: 22,
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 16,
+                  fontFamily: "Poppins_500Medium",
+                }}>
+                Checkout All
+              </Text>
+            </TouchableOpacity>
+    );
+  }
+  
+  
+  
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -28,30 +61,59 @@ export default function CartScreen({navigation}) {
               <Text style={styles.textStyle}>No item in your cart</Text>
             </View>
           ) : (
-            
+              // <ScrollView>
               <View style={styles.cardContainer}>
             <FlatList 
               data={cartItems}
+              style={{padding:10}}
               renderItem={({item})=>
                 // <Text>{item.name}</Text>
-                <Card>
-                  {console.log(item)}
-                  <Card.Title title={item.name}/>
-                  <Card.Content style={{flexDirection:'row'}}>
-                  <Text>{item.cupSize.item}</Text>                    
-                  <Text>{item.cupSize.description}</Text>
+                <Card style={{marginBottom:10}}>
+                  {/* {console.log(item)} */}
+                  <Card.Title  title={item.name} titleVariant="titleMedium" titleStyle={{fontSize:18,fontFamily:'Poppins_500Medium'}}/>
+                  <Card.Content>
+                    <View style={{flexDirection:'row', justifyContent:'space-between',}}>
+                      <View>
+                        <View style={{flexDirection:'row'}}>
+                          <Text style={{fontFamily:'Poppins_500Medium'}}>{item.cupSize.item}:</Text>                    
+                          <Text style={{marginLeft:10}}>{item.cupSize.description}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                          <Text style={{fontFamily:'Poppins_500Medium'}}>{item.addIn.item}:</Text>                    
+                          <Text style={{marginLeft:10}}>{item.addIn.description}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                          <Text style={{fontFamily:'Poppins_500Medium'}}>{item.creamer.item}:</Text>                    
+                          <Text style={{marginLeft:10}}>{item.creamer.description}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                          <Text style={{fontFamily:'Poppins_500Medium'}}>{item.flavor.item}:</Text>                    
+                          <Text style={{marginLeft:10}}>{item.flavor.description}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                          <Text style={{fontFamily:'Poppins_500Medium'}}>{item.sweetner.item}:</Text>                    
+                          <Text style={{marginLeft:10}}>{item.sweetner.description}</Text>
+                        </View>
+                      </View>
+                      <View style={{}}>
+                        <Image style={{ width: 110, height: 120, }} source={{uri:item.img}} />
+                      </View>
+                    </View>
                   </Card.Content>
                   <Card.Actions>
-                    <Button style={{backgroundColor:'red'}} onPress={()=>navigation.navigate('')}>Buy now</Button>
-                    <Button style={{backgroundColor:'red'}} onPress={()=>dispatch(removeFromCart({id:item.id}))}>Remove</Button>
+                    <Button style={{}} onPress={()=>navigation.navigate('CheckOut',{item})}>Buy now</Button>
+                    <Button style={{backgroundColor:'#b70000'}} onPress={()=>dispatch(removeFromCart({id:item.id}))}>Remove</Button>
+                    {/* <TouchableOpacity><Icon size={24} name="trash-outline"/></TouchableOpacity> */}
                   </Card.Actions>
                 </Card>
               }
               keyExtractor={item => item.id}
+              ListFooterComponent={buyAllButtonHandler.bind(this,navigation)}
             />
             </View>
             
-          )}
+          )
+          }
       </View>
     );
   }

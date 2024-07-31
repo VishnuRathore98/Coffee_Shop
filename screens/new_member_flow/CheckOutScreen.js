@@ -21,9 +21,10 @@ import { useSelector } from "react-redux";
 
 export default function CheckOutScreen({ navigation,route }) {
 
-  const cartItems = useSelector((state)=>state.cartItems.items);
+  console.log(route.params);
+  const cartItems = [route.params.item];
 
-  console.log("Inside CheckOutScreen: ",cartItems);
+  console.log("Inside CheckOutScreen: ",cartItems[0].name);
 
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
   if (!fontsLoaded) {

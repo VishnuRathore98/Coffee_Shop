@@ -58,6 +58,7 @@ export default function ProductDetailScreen({ navigation, route }) {
     const cartItem = {
       name:route.params.name,
       id: Math.floor(Math.random()*10000),
+      img:route.params.img,
       cupSize:
       {
         item:'Cup Size',
