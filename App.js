@@ -32,9 +32,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Badge } from "react-native-paper";
 
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "./store/redux/store";
+import { useState } from "react";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -108,11 +110,17 @@ function Home({ navigation }) {
 
 function DrawerNavigation() {
   const navigation = useNavigation();
+  const cartItems = useSelector((state)=> state.cartItems.items);
+
 
   return (
     <Drawer.Navigator
       initialRouteName='Home Tab'
+      backBehavior="initialRoute"
+      
       screenOptions={{
+        
+        drawerActiveTintColor:'#3e1910',
         headerTitleAlign: "center",
         headerTitle: () => (
           <Image
@@ -127,14 +135,18 @@ function DrawerNavigation() {
               size={34}
               style={{ marginRight: 20 }}
             />
+            <Badge style={{position:'absolute',right:10}} visible={cartItems.length>0?true:false}>{cartItems.length}</Badge>
           </TouchableOpacity>
         ),
         drawerStyle: { backgroundColor: "#F6F2ED" },
       }}>
+        
       <Drawer.Screen
         name='User'
+        
         component={AccountScreen}
         options={{
+          
           drawerLabel: () => (
             <View>
               <Text
@@ -165,11 +177,14 @@ function DrawerNavigation() {
           drawerItemStyle: { height: 100, justifyContent: "center" },
         }}
       />
+
       <Drawer.Screen
         name='Home Tab'
         component={Home}
+        
         options={{
           drawerIcon: ({ size }) => <Icon size={size} name='home-outline' />,
+          
         }}
       />
       <Drawer.Screen
@@ -187,7 +202,7 @@ function DrawerNavigation() {
         component={CartScreen}
         options={{
           drawerLabel: "My Cart",
-          drawerIcon: ({ size }) => <Icon size={size} name='cart-outline' />,
+          drawerIcon: ({ size }) => (<><Icon size={size} name='cart-outline' /><Badge style={styles.badge} visible={cartItems.length>0?true:false}>{cartItems.length}</Badge></>),
         }}
       />
       <Drawer.Screen
@@ -265,4 +280,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  badge:{
+    position:'absolute',
+    top:0,
+    left:20
+  }
 });

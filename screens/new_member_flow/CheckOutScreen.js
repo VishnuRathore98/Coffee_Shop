@@ -1,4 +1,5 @@
 import {
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -16,6 +17,7 @@ import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import { GlobalStyles } from "../../constants/styles";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 
 
@@ -23,8 +25,15 @@ export default function CheckOutScreen({ navigation,route }) {
 
   console.log(route.params);
   const cartItems = [route.params.item];
+  const [itemCount, setItemCount] = useState(0);
 
-  console.log("Inside CheckOutScreen: ",cartItems[0].name);
+
+  function orderSummary(){
+    return;
+  }
+
+
+  // console.log("Inside CheckOutScreen: ",item.name);
 
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
   if (!fontsLoaded) {
@@ -33,133 +42,146 @@ export default function CheckOutScreen({ navigation,route }) {
     return (
       <View style={styles.rootContainer}>
         <ScrollView>
-          <View style={styles.orderSummary}>
-            <View style={styles.orderDescription}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: 10,
-                }}>
-                <View>
-                  <Text
-                    style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
-                    {cartItems[0].name}
-                  </Text>
 
-                    <View style={{flexDirection:'row', }}>
-                    <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
-                    {cartItems[0].cupSize.item}: 
-                    </Text>
-                    <Text style={{ fontSize: 12, marginLeft:10}}>
-                    {cartItems[0].cupSize.description}
-                    </Text>   
+
+{/* Showing added cart items ready to buy */}
+            <FlatList
+              data={cartItems}
+              renderItem={({item})=>(
+                <View style={styles.orderSummary}>
+                <View style={styles.orderDescription}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      padding: 10,
+                    }}>
+                    <View>
+                      <Text
+                        style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
+                        {item.name}
+                      </Text>
+          
+                        <View style={{flexDirection:'row', }}>
+                        <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
+                        {item.cupSize.item}: 
+                        </Text>
+                        <Text style={{ fontSize: 12, marginLeft:10}}>
+                        {item.cupSize.description}
+                        </Text>   
+                      </View>
+          
+                        <View style={{flexDirection:'row', }}>
+                        <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
+                        {item.addIn.item}: 
+                        </Text>
+                        <Text style={{ fontSize: 12, marginLeft:10}}>
+                        {item.addIn.description}
+                        </Text>   
+                      </View>
+          
+                      <View style={{flexDirection:'row', }}>
+                        <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
+                        {item.creamer.item}: 
+                        </Text>
+                        <Text style={{ fontSize: 12, marginLeft:10}}>
+                        {item.creamer.description}
+                        </Text>   
+                      </View>
+          
+                      <View style={{flexDirection:'row', }}>
+                        <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
+                        {item.flavor.item}: 
+                        </Text>
+                        <Text style={{ fontSize: 12, marginLeft:10}}>
+                        {item.flavor.description}
+                        </Text>   
+                      </View>
+          
+                      <View style={{flexDirection:'row'}}>
+                        <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
+                        {item.sweetner.item}: 
+                        </Text>
+                        <Text style={{ fontSize: 12, marginLeft:10}}>
+                        {item.sweetner.description}
+                        </Text>   
+                      </View>
+          
+                    </View>
+                    <View>
+                      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                        $179.87
+                      </Text>
+                    </View>
                   </View>
-
-                    <View style={{flexDirection:'row', }}>
-                    <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
-                    {cartItems[0].addIn.item}: 
+                  <View style={{ padding: 10 }}>
+                    <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
+                      Special Instructions:
                     </Text>
-                    <Text style={{ fontSize: 12, marginLeft:10}}>
-                    {cartItems[0].addIn.description}
-                    </Text>   
+                    <TextInput
+                      multiline
+                      placeholder="Enter Instructions..."
+                      style={{ textAlign:'left',textAlignVertical:'top', borderRadius:8, height:100, padding:6, backgroundColor:'#ffffff' }}
+                      / >
                   </View>
-
-                  <View style={{flexDirection:'row', }}>
-                    <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
-                    {cartItems[0].creamer.item}: 
-                    </Text>
-                    <Text style={{ fontSize: 12, marginLeft:10}}>
-                    {cartItems[0].creamer.description}
-                    </Text>   
-                  </View>
-
-                  <View style={{flexDirection:'row', }}>
-                    <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
-                    {cartItems[0].flavor.item}: 
-                    </Text>
-                    <Text style={{ fontSize: 12, marginLeft:10}}>
-                    {cartItems[0].flavor.description}
-                    </Text>   
-                  </View>
-
-                  <View style={{flexDirection:'row'}}>
-                    <Text style={{ fontSize: 12, fontFamily: "Poppins_500Medium"}}>
-                    {cartItems[0].sweetner.item}: 
-                    </Text>
-                    <Text style={{ fontSize: 12, marginLeft:10}}>
-                    {cartItems[0].sweetner.description}
-                    </Text>   
-                  </View>
-
                 </View>
-                <View>
-                  <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                    $179.87
-                  </Text>
+          
+                {/* Order Count */}
+                <View style={styles.orderCount}>
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: 40,
+                      width: 140,
+                      borderRadius: 8,
+                      flexDirection: "row",
+                      backgroundColor: "white",
+                      elevation: 2,
+                    }}>
+                    <TouchableOpacity
+                      onPress={()=>itemCount<1?setItemCount(0):setItemCount(itemCount-1)}
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
+                      <Icon name='remove-outline' size={18} color='#9C4400' />
+                    </TouchableOpacity>
+                    <View
+                      style={{
+                        borderRadius: 4,
+                        height: 24,
+                        width: 36,
+                        borderWidth: 0.1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: 16,
+                      }}>
+                      <Text>{itemCount}</Text>
+                    </View>
+                    <TouchableOpacity
+                    onPress={()=>setItemCount(itemCount+1)}
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}>
+                      <Icon name='add-outline' size={18} color='#9C4400' />
+                    </TouchableOpacity>
+                  </View>
+                  <View>
+                    <Text style={{ fontSize: 18, fontWeight: "bold", padding: 10 }}>
+                      $179.87
+                    </Text>
+                  </View>
                 </View>
               </View>
-              <View style={{ padding: 10 }}>
-                <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
-                  Special Instructions:
-                </Text>
-                <TextInput
-                  multiline
-                  placeholder="Enter Instructions..."
-                  style={{ textAlign:'left',textAlignVertical:'top', borderRadius:8, height:100, padding:6, backgroundColor:'#ffffff' }}
-                  / >
-              </View>
-            </View>
+              )}
+              keyExtractor={item=>item.id}
 
-            {/* Order Count */}
-            <View style={styles.orderCount}>
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 40,
-                  width: 140,
-                  borderRadius: 8,
-                  flexDirection: "row",
-                  backgroundColor: "white",
-                  elevation: 2,
-                }}>
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}>
-                  <Icon name='remove-outline' size={18} color='#9C4400' />
-                </TouchableOpacity>
-                <View
-                  style={{
-                    borderRadius: 4,
-                    height: 24,
-                    width: 36,
-                    borderWidth: 0.1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: 16,
-                  }}>
-                  <Text>0</Text>
-                </View>
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}>
-                  <Icon name='add-outline' size={18} color='#9C4400' />
-                </TouchableOpacity>
-              </View>
-              <View>
-                <Text style={{ fontSize: 18, fontWeight: "bold", padding: 10 }}>
-                  $179.87
-                </Text>
-              </View>
-            </View>
-          </View>
+            />
+
 
           <View style={styles.orderActions}>
             <View
