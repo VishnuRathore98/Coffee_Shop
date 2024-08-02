@@ -73,7 +73,7 @@ function Home({ navigation }) {
         component={OrderScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Icon name='cafe-outline' size={size} />
+            <Icon name='fast-food-outline' size={size} />
           ),
         }}
       />
@@ -191,7 +191,7 @@ function DrawerNavigation() {
         name='OrderScreen'
         component={OrderScreen}
         options={{
-          drawerLabel: "My Orders",
+          drawerLabel: "Order",
           drawerIcon: ({ size }) => (
             <Icon size={size} name='fast-food-outline' />
           ),

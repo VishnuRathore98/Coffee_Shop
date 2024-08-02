@@ -48,7 +48,7 @@ export default function ScanAndPayScreen() {
     }
   }
   function renderItem1({ index, item }) {
-    console.log(item.img);
+    // console.log(item.img);
     return (
       <View>
         {/* <Image source={require(item.img)} height={500} width={300}/> */}
@@ -95,7 +95,7 @@ export default function ScanAndPayScreen() {
           autoPlay={false}
           data={views1}
           renderItem={({ index, item }) => {
-            console.log(index, item.img);
+            // console.log(index, item.img);
 
             switch (index) {
               case 0:

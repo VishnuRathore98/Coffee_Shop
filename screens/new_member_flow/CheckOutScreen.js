@@ -1,5 +1,6 @@
 import {
   FlatList,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -23,17 +24,16 @@ import { useState } from "react";
 
 export default function CheckOutScreen({ navigation,route }) {
 
-  console.log(route.params);
-  const cartItems = [route.params.item];
+  // console.log(route.params.cartItems);
+  const cartItems = route.params.cartItems;
   const [itemCount, setItemCount] = useState(0);
+  const [isPickup, setIsPickup] = useState(true);
+  // let selectedButtonColor="white";
 
 
-  function orderSummary(){
-    return;
-  }
+  // pickupHandler = ()=>setIsPickup(!isPickup);
 
-
-  // console.log("Inside CheckOutScreen: ",item.name);
+  console.log("CheckOutScreen ==>  ",cartItems);
 
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
   if (!fontsLoaded) {
@@ -48,8 +48,8 @@ export default function CheckOutScreen({ navigation,route }) {
             <FlatList
               data={cartItems}
               renderItem={({item})=>(
-                <View style={styles.orderSummary}>
-                <View style={styles.orderDescription}>
+                <View style={[styles.orderSummary,]}>
+                <View style={[styles.orderDescription,]}>
                   <View
                     style={{
                       flexDirection: "row",
@@ -109,21 +109,10 @@ export default function CheckOutScreen({ navigation,route }) {
           
                     </View>
                     <View>
-                      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                        $179.87
-                      </Text>
+                    <Image style={{ width: 110, height: 120, }} source={{uri:item.img}} />
                     </View>
                   </View>
-                  <View style={{ padding: 10 }}>
-                    <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
-                      Special Instructions:
-                    </Text>
-                    <TextInput
-                      multiline
-                      placeholder="Enter Instructions..."
-                      style={{ textAlign:'left',textAlignVertical:'top', borderRadius:8, height:100, padding:6, backgroundColor:'#ffffff' }}
-                      / >
-                  </View>
+                  
                 </View>
           
                 {/* Order Count */}
@@ -171,10 +160,10 @@ export default function CheckOutScreen({ navigation,route }) {
                     </TouchableOpacity>
                   </View>
                   <View>
-                    <Text style={{ fontSize: 18, fontWeight: "bold", padding: 10 }}>
-                      $179.87
-                    </Text>
-                  </View>
+                      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                        $179.87
+                      </Text>
+                    </View>
                 </View>
               </View>
               )}
@@ -184,6 +173,64 @@ export default function CheckOutScreen({ navigation,route }) {
 
 
           <View style={styles.orderActions}>
+                  <View style={{ padding: 10, marginBottom:10, backgroundColor:'#dbb4b2', borderRadius:12 }}>
+                    <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
+                      Special Instructions:
+                    </Text>
+                    <TextInput
+                      multiline
+                      placeholder="Enter Instructions..."
+                      style={{ textAlign:'left',textAlignVertical:'top', borderRadius:8, height:100, padding:6, backgroundColor:'#ffffff' }}
+                      / >
+                  </View>
+
+                  <View style={{ padding: 10, marginBottom:10, backgroundColor:'#dbb4b2', borderRadius:12 }}>
+                    <Text style={{ fontSize: 16, fontFamily: "Poppins_600SemiBold" }}>
+                      Bill Details:
+                    </Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text style={{ fontSize: 14, fontFamily: "Poppins_400Regular"}}>
+                        Item Total: 
+                        </Text>
+                        <Text style={{ fontSize: 14, marginLeft:10}}>
+                        $899.99
+                        </Text>   
+                      </View>
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text style={{ fontSize: 14, fontFamily: "Poppins_400Regular"}}>
+                        Delivery Fee: 
+                        </Text>
+                        <Text style={{ fontSize: 14, marginLeft:10}}>
+                        $29.99
+                        </Text>   
+                      </View>
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text style={{ fontSize: 14, fontFamily: "Poppins_400Regular"}}>
+                        Delivery Tip: 
+                        </Text>
+                        <Text style={{ fontSize: 14, marginLeft:10}}>
+                        $4.99
+                        </Text>   
+                      </View>
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text style={{ fontSize: 14, fontFamily: "Poppins_400Regular"}}>
+                        Tax Charges: 
+                        </Text>
+                        <Text style={{ fontSize: 14, marginLeft:10}}>
+                        $9.99
+                        </Text>   
+                      </View>
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text style={{ fontSize: 18, fontFamily: "Poppins_500Medium"}}>
+                        Total Pay: 
+                        </Text>
+                        <Text style={{ fontSize: 16, fontWeight:'bold', marginLeft:10}}>
+                        $999.99
+                        </Text>   
+                      </View>
+                  </View>
+
+            <View style={{backgroundColor:'#dbb4b2', borderRadius:12}}>
             <View
               style={{
                 flexDirection: "row",
@@ -249,53 +296,52 @@ export default function CheckOutScreen({ navigation,route }) {
             <View
               style={{
                 flexDirection: "row",
-                // justifyContent: "center",
-                // alignItems: "center",
                 padding: 10,
-                //   height:100
                 marginVertical: 24,
                 marginHorizontal: 10,
               }}>
               <TouchableOpacity
+              onPress={()=>setIsPickup(false)}
                 style={{
                   flex: 1,
-                  backgroundColor: "white",
+                  backgroundColor: (isPickup?"white":"green"),
                   height: 60,
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: 10,
                 }}>
                 <View
-                  style={{ justifyContent: "center", alignItems: "center" }}>
-                  <Icon name='cube-outline' size={30} />
+                  style={{ justifyContent: "center", alignItems: "center", }}>
+                  <Icon name='cube-outline' size={30} color={isPickup?"black":"white"} />
                 </View>
                 <View
                   style={{ justifyContent: "center", alignItems: "center" }}>
                   <Text
-                    style={{ fontSize: 16, fontFamily: "Poppins_500Medium" }}>
+                    style={{ fontSize: 16, fontFamily: "Poppins_500Medium", color: isPickup?"black":"white", }}>
                     Delivery
                   </Text>
                 </View>
               </TouchableOpacity>
 
               <TouchableOpacity
+                onPress={()=>setIsPickup(true)}
                 style={{
                   flex: 1,
-                  backgroundColor: "green",
+                  backgroundColor: (isPickup?"green":"white"),
                   height: 60,
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: 10,
                 }}>
                 <View
-                  style={{ justifyContent: "center", alignItems: "center" }}>
-                  <Icon name='location' size={30} color='white' />
+                  style={{ justifyContent: "center", alignItems: "center"}}>
+                  <Icon name='location' size={30} color={ isPickup?"white":"black"}  />
                 </View>
                 <View
                   style={{ justifyContent: "center", alignItems: "center" }}>
                   <Text
                     style={{
-                      color: "white",
+                      color: isPickup?"white":"black",
                       fontSize: 16,
                       fontFamily: "Poppins_500Medium",
                     }}>
@@ -305,6 +351,8 @@ export default function CheckOutScreen({ navigation,route }) {
               </TouchableOpacity>
             </View>
           </View>
+          </View>
+
           <TouchableOpacity
             onPress={() => navigation.navigate("TrackOrderScreen",{
               orderStatus: 0,
@@ -328,7 +376,7 @@ export default function CheckOutScreen({ navigation,route }) {
                 fontSize: 16,
                 fontFamily: "Poppins_500Medium",
               }}>
-              Checkout Now
+              Proceed To Pay
             </Text>
           </TouchableOpacity>
         </ScrollView>
@@ -336,14 +384,20 @@ export default function CheckOutScreen({ navigation,route }) {
     );
   }
 }
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     justifyContent: "flex-start",
-    padding: 2,
+    padding: 12,
+    backgroundColor:'#fff'
     // alignItems:'center'
   },
-  orderSummary: {},
+  orderSummary: {
+    borderRadius:12,
+    backgroundColor:'#dbb4b2',
+    marginBottom:10,
+  },
   orderDescription: {},
   orderCount: {
     padding: 12,
@@ -351,5 +405,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  orderActions: { marginVertical: 12 },
+  orderActions: { marginVertical: 12,
+    // backgroundColor:'#dbb4b2',
+   },
 });

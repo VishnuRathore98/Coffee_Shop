@@ -53,8 +53,8 @@ export default function SignInScreen({ navigation }) {
       }
     } catch (e) {
       Alert.alert("Error", "User not registered");
-      console.log("Response:", response);
-      console.log("Error:", e);
+      // console.log("Response:", response);
+      // console.log("Error:", e);
     }
   }
 

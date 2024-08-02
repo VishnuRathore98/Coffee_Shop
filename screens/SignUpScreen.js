@@ -39,21 +39,21 @@ export default function SignUpScreen({ navigation }) {
           // username:username,
         }
       );
-      console.log(response.data.email);
+      // console.log(response.data.email);
 
       // console.log(response.data);
       if (response.data.email == email) {
         Alert.alert("Success", "User successfully created", [
           { onPress: () => navigation.navigate("SignIn") },
         ]);
-        console.log("success");
+        // console.log("success");
       } else {
         Alert.alert("Failure!", "User not created, please try again.");
-        console.log(response.data);
+        // console.log(response.data);
       }
     } catch (e) {
       Alert.alert("Error", "User already registered.");
-      console.log(e);
+      // console.log(e);
     }
   }
 

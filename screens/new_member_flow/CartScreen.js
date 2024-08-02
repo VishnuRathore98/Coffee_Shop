@@ -17,7 +17,8 @@ export default function CartScreen({navigation}) {
 
   const cartItems = useSelector((state) => state.cartItems.items);
   const dispatch = useDispatch();
-  
+  console.log("CartScreen==> ",cartItems);
+
   function buyAllButtonHandler(){
     return(
       <TouchableOpacity
@@ -108,7 +109,7 @@ export default function CartScreen({navigation}) {
                 </Card>
               }
               keyExtractor={item => item.id}
-              ListFooterComponent={buyAllButtonHandler.bind(this,navigation)}
+              ListFooterComponent={buyAllButtonHandler}
             />
             </View>
             
