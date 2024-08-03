@@ -13,7 +13,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 import { useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
@@ -48,9 +48,7 @@ export default function CustomizeOrder({ navigation, route }) {
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
-  if (!fonstLoaded) {
-    return <AppLoading />;
-  } else {
+
     return (
       <View style={styles.rootContainer}>
         <View
@@ -526,7 +524,6 @@ export default function CustomizeOrder({ navigation, route }) {
       </View>
     );
   }
-}
 
 const styles = StyleSheet.create({
   rootContainer: {

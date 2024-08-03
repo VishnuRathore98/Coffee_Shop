@@ -13,7 +13,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 import { GlobalStyles } from "../../constants/styles";
 
 export default function ScreenTwo({ navigation }) {
@@ -23,9 +23,7 @@ export default function ScreenTwo({ navigation }) {
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+  
     return (
       <View style={styles.rootContainer}>
         <TouchableOpacity
@@ -87,7 +85,7 @@ export default function ScreenTwo({ navigation }) {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   rootContainer: {

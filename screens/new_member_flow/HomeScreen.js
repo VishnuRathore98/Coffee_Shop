@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import {
@@ -15,21 +16,26 @@ import {
   Poppins_100Thin,
   Poppins_300Light,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
+
 import { GlobalStyles } from "../../constants/styles";
 import { GlobalImages } from "../../constants/images";
 
 export default function HomeScreen({ navigation }) {
-  let [fonstLoaded] = useFonts({
+  let [fontsLoaded] = useFonts({
     Poppins_600SemiBold,
     Poppins_500Medium,
     Poppins_400Regular,
     Poppins_100Thin,
     Poppins_300Light,
   });
-  if (!fonstLoaded) {
-    return <AppLoading />;
+  if (!fontsLoaded) {
+    <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+    <ActivityIndicator size='large' color='brown' />
+    </View>
   } else {
+    
+
     return (
       <ScrollView>
         <View style={styles.rootContainer}>

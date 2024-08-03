@@ -13,7 +13,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 import { GlobalStyles } from "../../constants/styles";
 
 export default function ScreenThree({ navigation }) {
@@ -23,9 +23,7 @@ export default function ScreenThree({ navigation }) {
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+  
     return (
       <View style={styles.rootContainer}>
         {/* <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.skipButton}>
@@ -85,7 +83,7 @@ export default function ScreenThree({ navigation }) {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   rootContainer: {

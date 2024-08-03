@@ -5,7 +5,7 @@ import {
   Poppins_800ExtraBold,
   Poppins_400Regular,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 import { GlobalStyles } from "../../constants/styles";
 import { useSelector } from "react-redux";
 
@@ -18,9 +18,7 @@ export default function ReceiptScreen({ navigation,route }) {
     Poppins_800ExtraBold,
     Poppins_400Regular,
   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+
     return (
       <View style={styles.rootContainer}>
         <View style={styles.receiptContainer}>
@@ -118,7 +116,7 @@ export default function ReceiptScreen({ navigation,route }) {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   rootContainer: {

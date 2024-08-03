@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import {
   useFonts,
@@ -6,16 +6,23 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+import { useSelector } from "react-redux";
+
+
 
 export default function TrackOrderScreen({ navigation, route }) {
+
+  const receipt = useSelector((state) => state.receiptItems.items);
+console.log("Receipt ==> ",receipt['0'].transactionId);
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_700Bold,
   });
   if (!fontsLoaded) {
-    return <AppLoading />;
+    <View style={styles.loaderContainer}>
+      <ActivityIndicator size='large' color='brown' />
+    </View>;
   } else {
     return (
       <View style={styles.rootContainer}>
@@ -84,22 +91,22 @@ export default function TrackOrderScreen({ navigation, route }) {
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={styles.headingText}>Transaction ID</Text>
-              <Text style={styles.headingText}>{route.params.transactionId}</Text>
+              <Text style={styles.headingText}>{receipt['0'].transactionId}</Text>
             </View>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={styles.headingText}>Date</Text>
-              <Text style={styles.headingText}>{route.params.date}</Text>
+              <Text style={styles.headingText}>{receipt['0'].date}</Text>
             </View>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={styles.headingText}>Time</Text>
-              <Text style={styles.headingText}>{route.params.time}</Text>
+              <Text style={styles.headingText}>{receipt['0'].time}</Text>
             </View>
           </View>
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("ReceiptScreen",{...route.params})}
+              onPress={() => navigation.navigate("ReceiptScreen")}
               style={[styles.orderPickupButton, { width: 160 }]}>
               <Text style={styles.pickupButtonText}>Review Receipt</Text>
             </TouchableOpacity>
@@ -113,16 +120,12 @@ export default function TrackOrderScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    // borderWidth:0.1,
     marginHorizontal: 50,
     marginVertical: 80,
   },
   orderTrackingContainer: {
     backgroundColor: "white",
     justifyContent: "center",
-    // alignItems:'center',
     padding: 50,
     borderRadius: 22,
     marginBottom: 25,

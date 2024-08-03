@@ -4,7 +4,7 @@ import {
   Poppins_500Medium,
   Poppins_400Regular,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from 'react-native-paper';
 import { addToCart, removeFromCart } from '../../store/redux/store';
@@ -17,12 +17,12 @@ export default function CartScreen({navigation}) {
 
   const cartItems = useSelector((state) => state.cartItems.items);
   const dispatch = useDispatch();
-  console.log("CartScreen==> ",cartItems);
+  // console.log("CartScreen==> ",cartItems);
 
   function buyAllButtonHandler(){
     return(
       <TouchableOpacity
-              onPress={() => navigation.navigate("CheckOut",{cartItems})}
+              onPress={() => navigation.navigate("CheckOut")}
               style={{
                 backgroundColor: GlobalStyles.colors.signUp.fillColor1,
                 marginVertical: 24,
@@ -48,9 +48,7 @@ export default function CartScreen({navigation}) {
   
   
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+
     return (
       <View style={styles.rootContainer}>
           {cartItems.length == 0 ? (
@@ -118,7 +116,7 @@ export default function CartScreen({navigation}) {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   rootContainer: {

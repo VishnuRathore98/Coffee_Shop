@@ -8,6 +8,7 @@ import {
   Pressable,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import {
   useFonts,
@@ -15,7 +16,7 @@ import {
   Poppins_400Regular,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
-import AppLoading from "expo-app-loading";
+
 
 import { GlobalStyles } from "../constants/styles";
 
@@ -76,9 +77,12 @@ export default function SignUpScreen({ navigation }) {
     Poppins_400Regular,
     Poppins_600SemiBold,
   });
-  if (!fontsLoaded) {
-    <AppLoading />;
-  } else {
+if (!fontsLoaded) {
+  <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+  <ActivityIndicator size='large' color='brown' />
+  </View>
+} else {
+  
     return (
       <View style={styles.rootContainer}>
         <View style={styles.oneFifth}>
@@ -211,6 +215,7 @@ export default function SignUpScreen({ navigation }) {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   rootContainer: {
