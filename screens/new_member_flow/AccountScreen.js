@@ -20,8 +20,16 @@ import {
 import { GlobalStyles } from "../../constants/styles";
 
 export default function AccountScreen({ navigation }) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const [is2FactorAuthentication, setIs2FactorAuthentication] = useState(false);
+  const [isFaceId, setIsFaceId] = useState(false);
+  const [isPasscodeLock, setIsPasscodeLock] = useState(false);
+  const [isEmailNotification, setIsEmailNotification] = useState(false);
+  const [isPushNotifications, setIsPushNotifications] = useState(false);
+  const [isSpecialOffers, setIsSpecialOffers] = useState(false);
+  const [isEventReminders, setIsEventReminders] = useState(false);
+  const [isSecurityAlerts, setIsSecurityAlerts] = useState(false);
+
 
   function logoutPopUp() {
     Alert.alert("LogOut", "Are you sure you want to logout?", [
@@ -103,6 +111,7 @@ export default function AccountScreen({ navigation }) {
               />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={()=>navigation.navigate('Scan/Pay')}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -207,10 +216,10 @@ export default function AccountScreen({ navigation }) {
 
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={is2FactorAuthentication ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIs2FactorAuthentication(!is2FactorAuthentication)}
+                value={is2FactorAuthentication}
               />
             </View>
             <View
@@ -230,10 +239,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isFaceId ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsFaceId(!isFaceId)}
+                value={isFaceId}
               />
             </View>
             <View
@@ -253,10 +262,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isPasscodeLock ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsPasscodeLock(!isPasscodeLock)}
+                value={isPasscodeLock}
               />
             </View>
           </View>
@@ -291,10 +300,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isEmailNotification ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsEmailNotification(!isEmailNotification)}
+                value={isEmailNotification}
               />
             </View>
             <View
@@ -314,10 +323,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isPushNotifications ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsPushNotifications(!isPushNotifications)}
+                value={isPushNotifications}
               />
               {/* <Text></Text> */}
               {/* <Icon /> */}
@@ -339,10 +348,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isSpecialOffers ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsSpecialOffers(!isSpecialOffers)}
+                value={isSpecialOffers}
               />
               {/* <Text></Text> */}
               {/* <Icon /> */}
@@ -364,10 +373,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isEventReminders ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsEventReminders(!isEventReminders)}
+                value={isEventReminders}
               />
               {/* <Text></Text> */}
               {/* <Icon /> */}
@@ -389,10 +398,10 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#34C759" }}
-                thumbColor={isEnabled ? "#FFFFFF" : "#f4f3f4"}
+                thumbColor={isSecurityAlerts ? "#FFFFFF" : "#f4f3f4"}
                 ios_backgroundColor='#3e3e3e'
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={()=>setIsSecurityAlerts(!isSecurityAlerts)}
+                value={isSecurityAlerts}
               />
               {/* <Text></Text> */}
               {/* <Icon /> */}

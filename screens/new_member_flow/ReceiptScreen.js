@@ -9,9 +9,9 @@ import {
 import { GlobalStyles } from "../../constants/styles";
 import { useSelector } from "react-redux";
 
-export default function ReceiptScreen({ navigation,route }) {
+export default function ReceiptScreen({ navigation, }) {
 
-  const cartItems = useSelector((state)=>state.cartItems.items);
+  const receiptItems = useSelector((state)=>state.receiptItems.items);
 
   let [fontsLoaded] = useFonts({
     Poppins_500Medium,
@@ -32,7 +32,7 @@ export default function ReceiptScreen({ navigation,route }) {
                   justifyContent: "space-between",
                 }}>
                 <Text style={styles.headingText}>Transaction ID</Text>
-                <Text style={styles.headingText}>{route.params.transactionId}</Text>
+                <Text style={styles.headingText}>{receiptItems[0].transactionId}</Text>
               </View>
               <View
                 style={{
@@ -40,7 +40,7 @@ export default function ReceiptScreen({ navigation,route }) {
                   justifyContent: "space-between",
                 }}>
                 <Text style={styles.headingText}>Date</Text>
-                <Text style={styles.headingText}>{route.params.date}</Text>
+                <Text style={styles.headingText}>{receiptItems[0].date}</Text>
               </View>
               <View
                 style={{
@@ -48,16 +48,16 @@ export default function ReceiptScreen({ navigation,route }) {
                   justifyContent: "space-between",
                 }}>
                 <Text style={styles.headingText}>Time</Text>
-                <Text style={styles.headingText}>{route.params.time}</Text>
+                <Text style={styles.headingText}>{receiptItems[0].time}</Text>
               </View>
             </View>
 
             <View style={styles.receiptItems}>
               <Text style={styles.headingText}>Item</Text>
-              <Text style={styles.headingText}>{cartItems[0].name}</Text>
+              <Text style={styles.headingText}>{receiptItems[0].cartItems[0].name}</Text>
               <Text style={styles.itemContentText}>
-                {cartItems[0].cupSize.description}, {cartItems[0].sweetner.description} {cartItems[0].sweetner.item}, {cartItems[0].flavor.description} Pump (s) {cartItems[0].flavor.item}, 3 Shot (s)
-                Espresso, Pumpkin Spice Toppings, {cartItems[0].creamer.description}, {cartItems[0].addIn.description}
+                {receiptItems[0].cartItems[0].cupSize?.description}, {receiptItems[0].cartItems[0].sweetner?.description} {receiptItems[0].cartItems[0].sweetner?.item}, {receiptItems[0].cartItems[0].flavor?.description} Pump (s) {receiptItems[0].cartItems[0].flavor?.item}, 3 Shot (s)
+                Espresso, Pumpkin Spice Toppings, {receiptItems[0].cartItems[0].creamer?.description}, {receiptItems[0].cartItems[0].addIn?.description}
               </Text>
             </View>
 
@@ -108,7 +108,7 @@ export default function ReceiptScreen({ navigation,route }) {
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("TrackOrderScreen",{...route.params})}
+            onPress={() => navigation.navigate("TrackOrderScreen")}
             style={styles.trackButton}>
             <Text style={styles.trackButtonText}>Track Order</Text>
           </TouchableOpacity>

@@ -25,29 +25,29 @@ import { addToReceipt, emptyCart } from "../../store/redux/store";
 export default function CheckOutScreen({ navigation }) {
 
   const cartItems = useSelector((state) => state.cartItems.items);
-console.log("CartItems ==> ",cartItems);
+  // console.log("CartItems ==> ",cartItems);
+  
   const dispatch = useDispatch();
 
   // const cartItems = route.params.cartItems;
   const [itemCount, setItemCount] = useState(0);
   const [isPickup, setIsPickup] = useState(true);
-  const [pickupType, setPickupType] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [pickupType, setPickupType] = useState("Now");
+  const [paymentMethod, setPaymentMethod] = useState("CASH");
 
   // useEffect(()=>{console.log(pickupType);},[pickupType]);
 
   function proceedToPayHandler(){
     // console.log("... proceedToPayHandler called ...");
-
+    // console.log("Cart Items: ",cartItems);
     const receipt = {
-      ...cartItems,
+      cartItems,
       orderStatus: 0,
       transactionId: "V"+Math.floor(Math.random()*100000),
       date: new Date().toDateString(),
       time: new Date().toLocaleTimeString(),
     }
-
-    // console.log("Receipt data ==>  ",receipt);
+    console.log("Receipt in checkout screen: ",receipt);
 
     dispatch(addToReceipt({item:receipt}));
     
@@ -322,6 +322,7 @@ console.log("CartItems ==> ",cartItems);
 
                 <View style={{ backgroundColor: "#dbb4b2", borderRadius: 12 }}>
                   {/* Set pickup type radio group */}
+                  {isPickup?
                   <View style={{ padding: 6 }}>
                     <RadioButton.Group
                       onValueChange={(newValue) => setPickupType(newValue)}
@@ -382,8 +383,8 @@ console.log("CartItems ==> ",cartItems);
                         <RadioButton value='Later' />
                       </View>
                     </RadioButton.Group>
-                  </View>
-
+                  </View>:null
+                  }
                   <List.Section>
                     <List.Accordion
                       title='Payment Method'
@@ -443,7 +444,7 @@ console.log("CartItems ==> ",cartItems);
                                 Cash
                               </Text>
                             </View>
-                            <RadioButton value='Cash' />
+                            <RadioButton value='CASH' />
                           </View>
 
                           <View
@@ -467,7 +468,7 @@ console.log("CartItems ==> ",cartItems);
                                 Credit/Debit Card
                               </Text>
                             </View>
-                            <RadioButton value='Card' />
+                            <RadioButton value='CARD' />
                           </View>
                         </RadioButton.Group>
                       </View>
@@ -575,8 +576,7 @@ console.log("CartItems ==> ",cartItems);
                     color: "white",
                     fontSize: 16,
                     fontFamily: "Poppins_500Medium",
-                  }}>
-                  Proceed To Pay
+                  }}>{paymentMethod==='CASH'?'Place your Order':'Proceed To Pay'}
                 </Text>
               </TouchableOpacity>
             </>

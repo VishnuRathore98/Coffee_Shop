@@ -13,7 +13,9 @@ import { useSelector } from "react-redux";
 export default function TrackOrderScreen({ navigation, route }) {
 
   const receipt = useSelector((state) => state.receiptItems.items);
-console.log("Receipt ==> ",receipt['0'].transactionId);
+  
+  console.log("Receipt in Track order screen ==> ",receipt);
+
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -91,7 +93,7 @@ console.log("Receipt ==> ",receipt['0'].transactionId);
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Text style={styles.headingText}>Transaction ID</Text>
-              <Text style={styles.headingText}>{receipt['0'].transactionId}</Text>
+              <Text style={styles.headingText}>{receipt[0].transactionId}</Text>
             </View>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}>

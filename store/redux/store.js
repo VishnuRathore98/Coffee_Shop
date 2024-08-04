@@ -28,7 +28,7 @@ const receiptSlice = createSlice({
     },
     reducers:{
         addToReceipt: (state, action)=>{
-            // console.log("Inside store receipt ==> ",action.payload.item);
+            console.log(" receipt inside store ==> ",action.payload.item);
             state.items.push(action.payload.item);
         }
     }
