@@ -5,20 +5,63 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
+  Button,
 } from "react-native";
 import {
+  useFonts,
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_200ExtraLight,
 } from "@expo-google-fonts/poppins";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-reanimated-carousel";
+import BottomSheet, { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 
 export default function ScanAndPayScreen() {
   const [scanAndPaySelected, setScanAndPaySelected] = useState(true);
   const [rewardSelected, setRewardSelected] = useState(false);
   const ref = useRef(null);
+
+// Create a ref to control the Bottom Sheet
+const bottomSheetRef = useRef(null);
+
+// Define snap points for the Bottom Sheet
+const snapPoints = useMemo(() => [0, '25%', '50%'], []);
+
+// Render content inside the Bottom Sheet
+const renderContent = () => (
+
+    <Text >
+      This is a customizable bottom sheet in React Native using @gorhom/bottom-sheet.
+    </Text>
+
+
+);
+
+  function bottomSheetHandler(){
+    return (
+      <View style={{ flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5f5f5',}}>
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={0} // Initial snap point index
+        snapPoints={snapPoints}
+        enablePanDownToClose={true} // Allow swipe down to close
+        backgroundStyle={{backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,}}
+        handleIndicatorStyle={{  backgroundColor: '#ccc',}}
+      >
+        {renderContent()}
+      </BottomSheet>
+    </View>
+    );
+  }
 
   const views1 = [
     {
@@ -56,6 +99,17 @@ export default function ScanAndPayScreen() {
     );
   }
 
+
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    
+  });
+  if (!fontsLoaded) {
+    <View style={styles.loaderContainer}>
+      <ActivityIndicator size='large' color='brown' />
+    </View>;
+  } else {
   return (
     <View style={styles.rootContainer}>
       <View style={{ flexDirection: "row", marginTop: 20 }}>
@@ -161,6 +215,7 @@ export default function ScanAndPayScreen() {
                         </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
+                      onPress={bottomSheetHandler}
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
@@ -329,7 +384,7 @@ export default function ScanAndPayScreen() {
     </View>
   );
 }
-
+}
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
@@ -392,4 +447,8 @@ const styles = StyleSheet.create({
   carouselContainer: {
     borderRadius: 14,
   },
+  bottomSheetContainer:{
+    flex: 1,
+    alignItems: 'center',
+  }
 });
