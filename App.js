@@ -248,107 +248,104 @@ function DrawerNavigation() {
   );
 }
 
-// export default function App() {
-//   return (
-//     <>
-//       <StatusBar style='auto' />
-//       <Provider store={store}>
-//         <NavigationContainer>
-//           <Stack.Navigator screenOptions={{ headerShown: false }}>
-//             <Stack.Screen name='SignIn' component={SignInScreen} />
-//             <Stack.Screen name='SignUp' component={SignUpScreen} />
-//             <Stack.Screen name='HomeScreen' component={DrawerNavigation} />
-//             <Stack.Screen name='ScreenOne' component={ScreenOne} />
-//             <Stack.Screen name='ScreenTwo' component={ScreenTwo} />
-//             <Stack.Screen name='ScreenThree' component={ScreenThree} />
-//             <Stack.Screen
-//               name='ProductDetailScreen'
-//               component={ProductDetailScreen}
-//             />
-//             <Stack.Screen name='CustomizeOrder' component={CustomizeOrder} />
-//             <Stack.Screen name='CartScreen' component={CartScreen} />
-//           </Stack.Navigator>
-//         </NavigationContainer>
-//       </Provider>
-//     </>
-//   );
-// }
-
-import React, { useCallback, useMemo, useRef } from 'react';
-import { Button } from 'react-native';
-import {
-  BottomSheetModal,
-  BottomSheetView,
-  BottomSheetModalProvider,
-} from '@gorhom/bottom-sheet';
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-
-const App = () => {
-  // ref
-  const bottomSheetModalRef = useRef(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // callbacks
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-  
-  const handleSheetChanges = useCallback((index) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
-  // renders
+export default function App() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <Button
-          onPress={handlePresentModalPress}
-          title="Present Modal"
-          color="black"
-        />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={1}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-        >
-          <BottomSheetView style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-          </BottomSheetView>
-        </BottomSheetModal>
-      </View>
-    </BottomSheetModalProvider>
-    </GestureHandlerRootView>
+    <>
+      <StatusBar style='auto' />
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='SignIn' component={SignInScreen} />
+            <Stack.Screen name='SignUp' component={SignUpScreen} />
+            <Stack.Screen name='HomeScreen' component={DrawerNavigation} />
+            <Stack.Screen name='ScreenOne' component={ScreenOne} />
+            <Stack.Screen name='ScreenTwo' component={ScreenTwo} />
+            <Stack.Screen name='ScreenThree' component={ScreenThree} />
+            <Stack.Screen
+              name='ProductDetailScreen'
+              component={ProductDetailScreen}
+            />
+            <Stack.Screen name='CustomizeOrder' component={CustomizeOrder} />
+            <Stack.Screen name='CartScreen' component={CartScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    justifyContent: 'center',
-    backgroundColor: 'grey',
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
+// import React, { useCallback, useMemo, useRef } from 'react';
+// import { Button } from 'react-native';
+// import {
+//   BottomSheetModal,
+//   BottomSheetView,
+//   BottomSheetModalProvider,
+// } from '@gorhom/bottom-sheet';
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-export default App;
+// const App = () => {
+//   // ref
+//   const bottomSheetModalRef = useRef(null);
+
+//   // variables
+//   const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+//   // callbacks
+//   const handlePresentModalPress = useCallback(() => {
+//     bottomSheetModalRef.current?.present();
+//   }, []);
+  
+//   const handleSheetChanges = useCallback((index) => {
+//     console.log('handleSheetChanges', index);
+//   }, []);
+
+//   // renders
+//   return (
+//     <GestureHandlerRootView style={{ flex: 1 }}>
+//     <BottomSheetModalProvider>
+//       <View style={styles.container}>
+//         <Button
+//           onPress={handlePresentModalPress}
+//           title="Present Modal"
+//           color="black"
+//         />
+//         <BottomSheetModal
+//           ref={bottomSheetModalRef}
+//           index={1}
+//           snapPoints={snapPoints}
+//           onChange={handleSheetChanges}
+//         >
+//           <BottomSheetView style={styles.contentContainer}>
+//             <Text>Awesome 🎉</Text>
+//           </BottomSheetView>
+//         </BottomSheetModal>
+//       </View>
+//     </BottomSheetModalProvider>
+//     </GestureHandlerRootView>
+//   );
+// };
 
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
-//     alignItems: "center",
-//     justifyContent: "center",
+//     padding: 24,
+//     justifyContent: 'center',
+//     backgroundColor: 'grey',
 //   },
-//   badge:{
-//     position:'absolute',
-//     top:0,
-//     left:20
-//   }
+
 // });
+
+// export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badge:{
+    position:'absolute',
+    top:0,
+    left:20
+  }
+});

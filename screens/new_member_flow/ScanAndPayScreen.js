@@ -6,61 +6,36 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
-  Button,
+  Modal,
 } from "react-native";
 import {
   useFonts,
   Poppins_400Regular,
   Poppins_500Medium,
-  Poppins_200ExtraLight,
 } from "@expo-google-fonts/poppins";
 import { useState, useRef, useCallback, useMemo } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-reanimated-carousel";
-import BottomSheet, { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+
 
 export default function ScanAndPayScreen() {
   const [scanAndPaySelected, setScanAndPaySelected] = useState(true);
   const [rewardSelected, setRewardSelected] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const ref = useRef(null);
 
-// Create a ref to control the Bottom Sheet
-const bottomSheetRef = useRef(null);
-
-// Define snap points for the Bottom Sheet
-const snapPoints = useMemo(() => [0, '25%', '50%'], []);
-
-// Render content inside the Bottom Sheet
-const renderContent = () => (
-
-    <Text >
-      This is a customizable bottom sheet in React Native using @gorhom/bottom-sheet.
-    </Text>
-
-
-);
-
-  function bottomSheetHandler(){
-    return (
-      <View style={{ flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f5f5f5',}}>
-
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={0} // Initial snap point index
-        snapPoints={snapPoints}
-        enablePanDownToClose={true} // Allow swipe down to close
-        backgroundStyle={{backgroundColor: '#fff',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,}}
-        handleIndicatorStyle={{  backgroundColor: '#ccc',}}
-      >
-        {renderContent()}
-      </BottomSheet>
-    </View>
-    );
+  function cardModleHandler(){
+      if (isModalVisible) {
+      return (
+      <Modal animationType="slide" transparent={true} visible={isModalVisible} onRequestClose={setIsModalVisible(false)}>
+        <View>
+          <Text>Hello from Modal!</Text>
+        </View>
+      </Modal>
+      );
+      }else{
+        return null;
+      }
   }
 
   const views1 = [
@@ -112,6 +87,7 @@ const renderContent = () => (
   } else {
   return (
     <View style={styles.rootContainer}>
+        
       <View style={{ flexDirection: "row", marginTop: 20 }}>
         <TouchableOpacity
           style={{
@@ -136,7 +112,6 @@ const renderContent = () => (
           </Text>
         </TouchableOpacity>
       </View>
-
       {scanAndPaySelected ? (
         // Carousel will go in here
 
@@ -214,8 +189,17 @@ const renderContent = () => (
                           Add Funds
                         </Text>
                       </TouchableOpacity>
+
                       <TouchableOpacity
-                      onPress={bottomSheetHandler}
+                        onPress={()=>(
+                          
+                           <Modal animationType="slide" transparent={true} visible={true} onRequestClose={setIsModalVisible(false)}>
+                            <View>
+                              <Text>Hello from Modal!</Text>
+                            </View>
+                          </Modal>
+                          )
+                          }
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
@@ -379,8 +363,10 @@ const renderContent = () => (
             1300
           </Text>
           <Icon name='qr-code-outline' size={200} />
+     
         </View>
       )}
+
     </View>
   );
 }
@@ -450,5 +436,9 @@ const styles = StyleSheet.create({
   bottomSheetContainer:{
     flex: 1,
     alignItems: 'center',
+  },
+  bottomSheetContentContainer:{
+      flex: 1,
+      alignItems: 'center',
   }
 });
