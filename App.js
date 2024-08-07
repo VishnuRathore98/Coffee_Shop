@@ -37,6 +37,10 @@ import { Badge } from "react-native-paper";
 import { Provider, useSelector } from "react-redux";
 import { store } from "./store/redux/store";
 import { useState } from "react";
+import PersonalInfoScreen from "./screens/new_member_flow/PersonalInfoScreen";
+import TransactionHistoryScreen from "./screens/new_member_flow/TransactionHistoryScreen";
+import PrivacyAndDataScreen from "./screens/new_member_flow/PrivacyAndDataScreen";
+import AccountIdScreen from "./screens/new_member_flow/AccountIdScreen";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -267,75 +271,17 @@ export default function App() {
             />
             <Stack.Screen name='CustomizeOrder' component={CustomizeOrder} />
             <Stack.Screen name='CartScreen' component={CartScreen} />
+            <Stack.Screen name='Personal Info' component={PersonalInfoScreen} options={{headerShown:true,}} />
+            <Stack.Screen name='Transaction History' component={TransactionHistoryScreen} options={{headerShown:true,}} />
+            <Stack.Screen name='Privacy And Data' component={PrivacyAndDataScreen} options={{headerShown:true,}} />
+            <Stack.Screen name='Account Id' component={AccountIdScreen} options={{headerShown:true,}} />
+
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
     </>
   );
 }
-
-// import React, { useCallback, useMemo, useRef } from 'react';
-// import { Button } from 'react-native';
-// import {
-//   BottomSheetModal,
-//   BottomSheetView,
-//   BottomSheetModalProvider,
-// } from '@gorhom/bottom-sheet';
-// import { GestureHandlerRootView } from "react-native-gesture-handler";
-
-// const App = () => {
-//   // ref
-//   const bottomSheetModalRef = useRef(null);
-
-//   // variables
-//   const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-//   // callbacks
-//   const handlePresentModalPress = useCallback(() => {
-//     bottomSheetModalRef.current?.present();
-//   }, []);
-  
-//   const handleSheetChanges = useCallback((index) => {
-//     console.log('handleSheetChanges', index);
-//   }, []);
-
-//   // renders
-//   return (
-//     <GestureHandlerRootView style={{ flex: 1 }}>
-//     <BottomSheetModalProvider>
-//       <View style={styles.container}>
-//         <Button
-//           onPress={handlePresentModalPress}
-//           title="Present Modal"
-//           color="black"
-//         />
-//         <BottomSheetModal
-//           ref={bottomSheetModalRef}
-//           index={1}
-//           snapPoints={snapPoints}
-//           onChange={handleSheetChanges}
-//         >
-//           <BottomSheetView style={styles.contentContainer}>
-//             <Text>Awesome 🎉</Text>
-//           </BottomSheetView>
-//         </BottomSheetModal>
-//       </View>
-//     </BottomSheetModalProvider>
-//     </GestureHandlerRootView>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 24,
-//     justifyContent: 'center',
-//     backgroundColor: 'grey',
-//   },
-
-// });
-
-// export default App;
 
 const styles = StyleSheet.create({
   container: {

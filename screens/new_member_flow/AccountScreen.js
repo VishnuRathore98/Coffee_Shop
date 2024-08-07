@@ -89,6 +89,7 @@ export default function AccountScreen({ navigation }) {
               Profile
             </Text>
             <TouchableOpacity
+            onPress={()=>navigation.navigate('Personal Info')}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -130,6 +131,7 @@ export default function AccountScreen({ navigation }) {
               <Icon name='card-outline' size={24} color='#434343' />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={()=>navigation.navigate('Transaction History')}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -147,7 +149,8 @@ export default function AccountScreen({ navigation }) {
               </Text>
               <Icon name='reader-outline' size={24} color='#434343' />
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity 
+            onPress={()=>navigation.navigate('Privacy And Data')}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -166,6 +169,8 @@ export default function AccountScreen({ navigation }) {
               <Icon name='hand-left-outline' size={24} color='#434343' />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={()=>navigation.navigate('Account Id')}
+
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
