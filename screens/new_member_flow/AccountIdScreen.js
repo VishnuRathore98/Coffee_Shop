@@ -1,9 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 export default function AccountIdScreen(){
- return <View style={styles.rootContainer}>
-    <Text>Account Id Screen</Text>
+ return (
+    <View style={styles.rootContainer}>
+
+        <Text>Account Id Screen</Text>
     </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -12,5 +15,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#F6F2ED',
         justifyContent:'center',
         alignItems:'center'
-    }
+    },
+    
 });

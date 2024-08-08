@@ -59,6 +59,29 @@ function logoutPopUp({ navigation }) {
   ]);
 }
 
+function UserProfile(){
+  return(
+    <View>
+    <Text
+      style={{
+        fontSize: 20,
+        fontFamily: "Poppins_500Medium",
+        color: "#434343",
+      }}>
+      Welcome,
+    </Text>
+    <Text
+      style={{
+        fontSize: 20,
+        fontFamily: "Poppins_500Medium",
+        color: "#434343",
+      }}>
+      John
+    </Text>
+  </View>
+  );
+}
+
 // Bottom Tab Navigator
 function Home({ navigation }) {
   return (
@@ -112,6 +135,7 @@ function Home({ navigation }) {
   );
 }
 
+
 function DrawerNavigation() {
   const navigation = useNavigation();
   const cartItems = useSelector((state)=> state.cartItems.items);
@@ -121,6 +145,7 @@ function DrawerNavigation() {
     <Drawer.Navigator
       initialRouteName='Home Tab'
       backBehavior="initialRoute"
+      // drawerContent={()=><UserProfile/>}
       
       screenOptions={{
         
@@ -144,7 +169,7 @@ function DrawerNavigation() {
         ),
         drawerStyle: { backgroundColor: "#F6F2ED" },
       }}>
-        
+
       <Drawer.Screen
         name='User'
         
