@@ -41,10 +41,21 @@ import PersonalInfoScreen from "./screens/new_member_flow/PersonalInfoScreen";
 import TransactionHistoryScreen from "./screens/new_member_flow/TransactionHistoryScreen";
 import PrivacyAndDataScreen from "./screens/new_member_flow/PrivacyAndDataScreen";
 import AccountIdScreen from "./screens/new_member_flow/AccountIdScreen";
+import * as Notification from 'expo-notifications';
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+Notification.setNotificationHandler({
+  handleNotification: async() => {
+    return{
+      shouldPlaySound:true,
+      shouldSetBadge:false,
+      shouldShowAlert:true
+    }
+  }
+});
 
 function logoutPopUp({ navigation }) {
   Alert.alert("LogOut", "Are you sure you want to logout?", [

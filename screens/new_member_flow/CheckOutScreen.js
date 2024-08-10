@@ -21,6 +21,8 @@ import { GlobalStyles } from "../../constants/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addToReceipt, emptyCart } from "../../store/redux/store";
+import * as Notifications from 'expo-notifications';
+
 
 export default function CheckOutScreen({ navigation }) {
 
@@ -36,6 +38,19 @@ export default function CheckOutScreen({ navigation }) {
   const [paymentMethod, setPaymentMethod] = useState("CASH");
 
   // useEffect(()=>{console.log(pickupType);},[pickupType]);
+
+  function scheduleNotificationHandler(){
+    Notifications.scheduleNotificationAsync({
+      content:{
+        title:'Order Placed',
+        body:'Your order is placed successfully',
+        data:{ item:cartItems },
+      },
+      trigger:{
+        seconds:2,
+      }
+    });
+  }
 
   function proceedToPayHandler(){
     // console.log("... proceedToPayHandler called ...");
@@ -54,6 +69,9 @@ export default function CheckOutScreen({ navigation }) {
     dispatch(emptyCart());
 
     navigation.navigate("TrackOrderScreen");
+
+    scheduleNotificationHandler();
+
   }
 
   let [fontsLoaded] = useFonts({ Poppins_500Medium, Poppins_400Regular });
