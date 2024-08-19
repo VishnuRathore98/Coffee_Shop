@@ -18,6 +18,7 @@ import {
 import { useState, useRef, useCallback, useMemo } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-reanimated-carousel";
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 
 export default function ScanAndPayScreen() {
@@ -415,7 +416,8 @@ export default function ScanAndPayScreen() {
         </View>
         )
       } 
-      
+
+      <StripeProvider>
       <Modal
           animationType="slide"
           transparent={true}
@@ -473,6 +475,7 @@ export default function ScanAndPayScreen() {
             </View>
           </View>
       </Modal>
+      </StripeProvider>
 
     </View>
   );
